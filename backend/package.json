@@ -4,6 +4,7 @@
   "description": "The Jiffer backend",
   "main": "dist/index.js",
   "scripts": {
+    "start": "node dist/index.js",
     "build": "tsc",
     "watch": "npm run build -- --watch"
   },
@@ -11,9 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "convertapi": "^1.11.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1"
   },
   "devDependencies": {
-    "@types/express": "^4.17.13"
+    "@types/express": "^4.17.13",
+    "@types/express-fileupload": "^1.1.7"
   }
 }
