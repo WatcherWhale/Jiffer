@@ -1,0 +1,19 @@
+{
+  "name": "jiffer.backend",
+  "version": "0.0.1",
+  "description": "The Jiffer backend",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "npm run build -- --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "convertapi": "^1.11.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13"
+  }
+}
