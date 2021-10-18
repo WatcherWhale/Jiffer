@@ -43,7 +43,7 @@ router.post("/create", async (req, res) => {
     });
 
     // Save the gif
-    await result.saveFiles("temp/" + req.body.name + ".gif");
+    await result.saveFiles("./temp/" + req.body.name + ".gif");
 
     // Remove files
     for(const i in fileArr)
