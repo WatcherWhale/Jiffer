@@ -1,0 +1,27 @@
+{
+    "port": 8080,
+    "useStaticBucket": true,
+    "buckets": {
+        "gifs": {
+            "region": "",
+            "name": ""
+        },
+        "static": {
+            "region": "",
+            "name": ""
+        }
+    },
+    "db": {
+        "host": "",
+        "user": "",
+        "password": "",
+        "port": 3306,
+        "database": ""
+    },
+    "cognito": {
+        "poolId": "",
+        "clientId": "",
+        "poolRegion": ""
+
+    }
+}

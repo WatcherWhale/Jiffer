@@ -1,0 +1,53 @@
+<!--header>
+    <span><a routerLink="/"> J  i  f  f  e  r </a></span>
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a routerLink="/"> Home <i class="fas fa-home"></i></a></li>
+            <li><a routerLink="/create">  CreateYourOwnJIFF <i class="fas fa-photo-video"></i></a></li>
+            <li><a routerLink="/eula">  User Agreement <i class="far fa-handshake"></i></a></li>
+            <li><a routerLink="/login">  Log Out - Log In <i class="fas fa-sign-out-alt"></i></a></li>
+        </ul>
+    </nav>
+</header-->
+
+<nav class="navbar is-danger">
+    <div class="navbar-brand">
+        <a class="navbar-item" routerLink="/">
+            <span class="logo">J  i  f  f  e  r</span>
+        </a>
+        <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+
+    <div class="navbar-menu" id="menu">
+        <div class="navbar-end">
+            <a class="navbar-item" routerLink="/">
+                <span class="icon"><i class="fas fa-home"></i></span>
+                <span>Home</span>
+            </a>
+            <a class="navbar-item" routerLink="/create">
+                <span class="icon"><i class="fas fa-photo-video"></i></span>
+                <span>Create Your Own Jiff</span>
+            </a>
+            <a class="navbar-item" routerLink="/eula">
+                <span class="icon"><i class="far fa-handshake"></i></span>
+                <span>User Agreement</span>
+            </a>
+            <a class="navbar-item" routerLink="/login" *ngIf="!cog.cookieChecker()">
+                <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+                <span>Log In</span>
+            </a>
+            <a class="navbar-item" href="/logout" *ngIf="cog.cookieChecker()">
+                <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+<router-outlet></router-outlet>

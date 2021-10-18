@@ -1,0 +1,27 @@
+<article class="notification is-danger">
+    <figure class="image" [ngClass]="{'carousel-figure': carousel}">
+        <img src="{{api.getHost()}}/jiff/{{uuid}}.gif">
+    </figure>
+    <div class="p-5 overlay has-text-centered">
+        <div class="centered">
+            <p class="title">{{name}}</p>
+
+            <div class="title is-6 has-text-centered" *ngIf="copied">Copied</div>
+
+            <div class="field has-addons is-justify-content-center is-flex">
+                <p class="control">
+                    <a class="button is-danger is-rounded" cdkCopyToClipboard="{{api.getHost()}}/jiff/{{uuid}}.gif" (click)="copied = true">
+                        <span class="icon"><i class="fas fa-copy"></i></span> 
+                        <span>Copy</span>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger is-rounded" download="{{name}}.gif" href="{{api.getHost()}}/jiff/{{uuid}}.gif">
+                        <span class="icon"><i class="fas fa-download"></i></span>
+                        <span>Download</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</article>

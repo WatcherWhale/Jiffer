@@ -1,0 +1,40 @@
+p.maintitle{
+    color:white;
+    margin-top:20px;
+    margin-left:30px;
+    font-weight: bold;
+}
+
+.notification {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.columns {
+    justify-content: center;
+}
+
+.tile.responsive {
+    flex: none;
+    width: 100%;
+}
+
+.tile {
+    flex-grow: 0 !important
+}
+
+@media (min-width: 769px) {
+    .tile.responsive {
+        flex: none;
+        width: 50%;
+    }
+}
+
+@media (min-width: 1408px) {
+    .tile.responsive {
+        flex: none;
+        width: 25%;
+    }
+}
+

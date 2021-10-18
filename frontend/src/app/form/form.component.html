@@ -1,0 +1,79 @@
+<div class="card">
+    <div class="card-content">
+        <div class="content">
+            <form enctype="multipart/form-data" *ngIf="!imageUrl">
+                <fieldset [disabled]="submitted">
+                    <p>Image-To-JIFF converter </p>
+                    <div class="field">
+                        <label class="label text">Name of your JIFF:</label>
+                        <input id="name"class="input is-danger is-rounded" type="text" name="name">
+                    </div>
+
+                    <div class="field">
+                        <label class="label text">Frame Delay (ms): </label>
+                        <input id="delaySlider" class="slider has-output is-danger" min="0" max="5000" value="1000" step="10" type="range" name="delay">
+                        <output for="delaySlider" class="sliderOutput">1000</output>
+                    </div>
+
+                    <div class="field">
+                        <label class="switch is-rounded">
+                            <input type="checkbox" value="false" (click)="AdvancedParams()">
+                            <span class="check is-danger"></span>
+                            <span class="control-label">Advanced parameters</span>
+                        </label>
+                    </div>
+
+                    <div *ngIf=advanced>
+                        <textarea class="textarea is-danger" placeholder="Your parameters here..." name="filters"></textarea>
+                    </div>
+
+                    <div class="field">
+                        <input class="is-checkradio has-background-color is-danger" id="featuredCheckBox" type="checkbox" name="featured">
+                        <label for="featuredCheckBox">Featured JIFF</label>
+                    </div>
+
+                    <br>
+
+                    <div class="file is-danger has-name is-fullwidth">
+                        <label class="file-label">
+                            <input class="file-input" type="file" multiple id="files" name="files" accept="image/png, image/jpeg" #filesInput (change)="filesChanged(filesInput.files)">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-folder-open"></i>
+                                </span>
+                                <span class="file-label">
+                                Browse
+                                </span>
+                            </span>
+                            <span class="file-name" >
+                                {{filesStr}}
+                            </span>
+                        </label>
+                    </div>
+                </fieldset>
+            </form>
+
+            <div class="field">
+                <button class="button is-danger" [ngClass]="{'is-loading': submitted}" (click)="submit()" *ngIf="!imageUrl"> Submit </button>
+            </div>
+
+            <figure class="image" *ngIf="imageUrl">
+                <img [src]="imageUrl" >
+            </figure>
+
+            <div class="field has-addons" *ngIf="imageUrl">
+                <div class="control">
+                    <input class="input is-danger is-rounded" type="text" readonly [value]="imageUrl">
+                </div>
+                <div class="control">
+                    <a cdkCopyToClipboard="{{imageUrl}}"class="button is-danger is-rounded" (click)="Copied()">Copy</a>
+                    <label *ngIf="copied" style="margin-left:10px;">Copied!</label>
+                </div>
+            </div>
+            <div class="field" *ngIf="imageUrl" style="margin-left:40%">
+                <a href="{{imageUrl}}" download="{{id}}.gif" class="button is-danger is-rounded" id="download">Download</a>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{
+  "name": "jiffer-lambda",
+  "version": "1.0.0",
+  "description": "The Jiff creation lambda function.",
+  "contributors": [
+    {
+      "name": "Mathias Maes"
+    },
+    {
+      "name": "Cato van Hooijdonk"
+    },
+    {
+      "name": "Bert Van Itterbeeck"
+    }
+  ],
+  "license": "GPL-3.0-or-later",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.1024.0",
+    "gm": "^1.23.1",
+    "mysql": "^2.18.1"
+  }
+}

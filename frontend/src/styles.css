@@ -1,0 +1,6 @@
+html{
+    background-image: url("/assets/background.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}

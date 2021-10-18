@@ -1,0 +1,61 @@
+* {
+    color: white;
+}
+
+.card {
+    width:750px;
+    margin-top:20px;
+    margin-left:10px;
+    background-color:rgba(241, 113, 113, 0.322);
+    border-radius: 20px;
+}
+
+a {
+    color:rgb(228, 69, 82);
+}
+
+.checkbox {
+    margin-left:30px;
+    color:white
+}
+
+input.input {
+    width: 450px;
+    background-color:rgba(255, 255, 255, 0.795);
+    color:red;
+}
+
+
+p {
+    font-weight: bold;
+    font-size: large;
+}
+
+form {
+    margin-bottom: 2rem;
+}
+
+.has-addons {
+    justify-content: center;
+}
+
+label.text{
+    margin-left:20px;
+}
+
+.file-name{
+    border-color: transparent;
+    border-radius: 10px;
+}
+.sliderOutput{
+    width: 4rem !important;
+}
+#delaySlider{
+    width:89%;
+}
+
+textarea.is-danger{
+    margin-bottom: 50px;
+    color:red;
+    background-color: rgba(255, 255, 255, 0.795);
+}
