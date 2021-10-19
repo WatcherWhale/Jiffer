@@ -1,10 +1,18 @@
 import fs from 'fs';
+import path from 'path';
 import express from 'express';
 import ConvertAPI from "convertapi";
 import {UploadedFile} from 'express-fileupload';
+import {Bucket} from './bucket';
+
+import { v4 as uuid } from 'uuid';
+
+const config = require('../config.json');
 
 const router = express.Router();
-const convertapi = new ConvertAPI('axikhXdmDlqY2I5R');
+const convertapi = new ConvertAPI(config["convert-key"]);
+
+const bucket = new Bucket(config.bucket.name, config.bucket.region);
 
 router.post("/create", async (req, res) => {
 
@@ -30,7 +38,7 @@ router.post("/create", async (req, res) => {
 
     for(const i in files)
     {
-        const file = "./temp/" + files[i].name;
+        const file = path.join("./temp/", files[i].name);
         await files[i].mv(file);
         fileArr.push(file)
     }
@@ -43,7 +51,8 @@ router.post("/create", async (req, res) => {
     });
 
     // Save the gif
-    await result.saveFiles("./temp/" + req.body.name + ".gif");
+    const gifPath = path.join("./temp", req.body.name + ".gif")
+    await result.saveFiles(gifPath);
 
     // Remove files
     for(const i in fileArr)
@@ -51,7 +60,8 @@ router.post("/create", async (req, res) => {
         fs.rmSync(fileArr[i]);
     }
 
-    // TODO: Upload to a s3 bucket
+    // Upload file to bucket
+    await bucket.uploadFile(gifPath, uuid() + ".gif");
 
     res.contentType("application/json")
         .send({"status": 200});
