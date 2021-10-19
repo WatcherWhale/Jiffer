@@ -1,13 +1,12 @@
 import fs from "fs";
 import path from "path";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"; //
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 export class Bucket
 {
     private client;
 
-    constructor(private readonly bucketName: string, private readonly userKey: string, 
-                private readonly secretKey: string, region: string)
+    constructor(private readonly bucketName: string, region: string)
     {
         this.client = new S3Client({region: region});
     }
