@@ -1,6 +1,7 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
 import { APIRouter } from './api';
+import { AuthMiddleware } from './authentication';
 
 const app = express();
 const config = require('../config.json');
@@ -11,6 +12,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(fileUpload({
     useTempFiles : false
 }));
+app.use(AuthMiddleware);
 
 // Register Routes
 app.use("/api/v1", APIRouter);

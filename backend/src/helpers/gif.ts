@@ -2,7 +2,7 @@ import path from "path";
 import ConvertAPI from "convertapi";
 import { v4 as uuid } from "uuid";
 
-const config = require('../config.json');
+const config = require('../../config.json');
 
 const convertapi = new ConvertAPI(config["convert-key"]);
 

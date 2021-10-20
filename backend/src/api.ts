@@ -1,9 +1,9 @@
 import fs from 'fs';
 import express from 'express';
 import {UploadedFile} from 'express-fileupload';
-import {Bucket} from './bucket';
-import { generateGif } from './gif';
-import {downloadFiles, removeFilesSync} from './files';
+import {Bucket} from './helpers/bucket';
+import { generateGif } from './helpers/gif';
+import {downloadFiles, removeFilesSync} from './helpers/files';
 
 const config = require('../config.json');
 
@@ -12,9 +12,15 @@ const bucket = new Bucket(config.bucket.name, config.bucket.region);
 
 router.post("/create", async (req, res) => {
 
-    // TODO: Check authentication
+    // Check if the user is authenticated
+    if(!req.authenticated)
+    {
+        res.contentType("application/json")
+            .status(401)
+            .send({"status": 401});
+    }
 
-    // Check if there a re files attached
+    // Check if there are files attached
     if(!req.files)
     {
         res.contentType("application/json")
@@ -24,13 +30,13 @@ router.post("/create", async (req, res) => {
     }
 
     // Save uploaded files
-    const fileArr = await downloadFiles(req.files.files as UploadedFile[]);
+    const files = await downloadFiles(req.files.files as UploadedFile[]);
 
     // Generate GIF
-    generateGif(fileArr, req.body.delay || 100).then((gif) =>
+    generateGif(files, req.body.delay || 100).then((gif) =>
     {
         // Upload GIF to s3
-        bucket.uploadFile(gif.path, gif.id + ".gif").then(() =>
+        bucket.uploadFile(gif.path, gif.id + ".gif", req.body.featured || false).then(() =>
         {
             // TODO: Register in database
 
@@ -63,7 +69,7 @@ router.post("/create", async (req, res) => {
             });
     })
     .finally(() => {
-        removeFilesSync(fileArr);
+        removeFilesSync(files);
     })
 });
 
