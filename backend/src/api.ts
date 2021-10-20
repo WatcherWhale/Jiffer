@@ -2,6 +2,7 @@ import fs from 'fs';
 import express from 'express';
 import {UploadedFile} from 'express-fileupload';
 import {Bucket} from './helpers/bucket';
+import { Database } from './helpers/database';
 import { generateGif } from './helpers/gif';
 import {downloadFiles, removeFilesSync} from './helpers/files';
 
@@ -9,6 +10,7 @@ const config = require('../config.json');
 
 const router = express.Router();
 const bucket = new Bucket(config.bucket.name, config.bucket.region);
+const db = new Database();
 
 router.post("/create", async (req, res) => {
 
@@ -38,11 +40,21 @@ router.post("/create", async (req, res) => {
         // Upload GIF to s3
         bucket.uploadFile(gif.path, gif.id + ".gif", req.body.featured || false).then(() =>
         {
-            // TODO: Register in database
+            db.RegisterGif(gif.id, gif.path).then(() =>
+            {
+                // Send OK message
+                res.contentType("application/json")
+                    .send({"status": 200});
+            })
+            .catch((err) =>
+            {
+                res.status(500).contentType("application/json")
+                    .send({
+                        "status": 500,
+                        "message": "Failed to process gif."
+                    });
+            })
 
-            // Send OK message
-            res.contentType("application/json")
-                .send({"status": 200});
         })
         .catch((err) =>
         {
