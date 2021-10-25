@@ -20,7 +20,7 @@ module.exports = {
     production: {
       "user": "ec2-user",
       "host": "54.161.133.243",
-      "ref" : "origin/master",
+      "ref" : "origin/ec2",
       "repo": "git@github.com:WatcherWhale/ict-arch.git",
       "path": "/home/ec2-user/jiffer",
       "post-deploy" : "cd backend && npm install"
