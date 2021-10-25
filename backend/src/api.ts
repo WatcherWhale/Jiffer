@@ -1,14 +1,28 @@
 import fs from 'fs';
 import express from 'express';
-import ConvertAPI from "convertapi";
 import {UploadedFile} from 'express-fileupload';
+import {Bucket} from './helpers/bucket';
+import { Database } from './helpers/database';
+import { generateGif } from './helpers/gif';
+import {downloadFiles, removeFilesSync} from './helpers/files';
+
+const config = require('../config.json');
 
 const router = express.Router();
-const convertapi = new ConvertAPI('axikhXdmDlqY2I5R');
+const bucket = new Bucket(config.bucket.name, config.bucket.region);
+const db = new Database();
 
 router.post("/create", async (req, res) => {
 
-    // Check if there a re files attached
+    // Check if the user is authenticated
+    if(!req.authenticated)
+    {
+        res.contentType("application/json")
+            .status(401)
+            .send({"status": 401});
+    }
+
+    // Check if there are files attached
     if(!req.files)
     {
         res.contentType("application/json")
@@ -17,44 +31,58 @@ router.post("/create", async (req, res) => {
         return;
     }
 
-    // Create the temp folder if it doesn't exists
-    if(!fs.existsSync("./temp"))
-    {
-        fs.mkdirSync("./temp");
-    }
-
-
     // Save uploaded files
-    const files = req.files.files as UploadedFile[];
-    const fileArr = [];
+    const files = await downloadFiles(req.files.files as UploadedFile[]);
 
-    for(const i in files)
+    // Generate GIF
+    generateGif(files, req.body.delay || 100).then((gif) =>
     {
-        const file = "./temp/" + files[i].name;
-        await files[i].mv(file);
-        fileArr.push(file)
-    }
+        // Upload GIF to s3
+        bucket.uploadFile(gif.path, gif.id + ".gif", req.body.featured || false).then(() =>
+        {
+            db.RegisterGif(gif.id, gif.path).then(() =>
+            {
+                // Send OK message
+                res.contentType("application/json")
+                    .send({"status": 200});
+            })
+            .catch((err) =>
+            {
+                res.status(500).contentType("application/json")
+                    .send({
+                        "status": 500,
+                        "message": "Failed to process gif."
+                    });
+            })
 
+        })
+        .catch((err) =>
+        {
+            res.status(500).contentType("application/json")
+                .send({
+                    "status": 500,
+                    "message": "Failed to process gif."
+                });
 
-    // Upload files to the GIF-api
-    const result = await convertapi.convert("gif", {
-        Files: fileArr,
-        AnimationDelay: req.body.delay
-    });
+        })
+        .finally(() =>
+        {
+            // Always remove the generated GIF
+            fs.rmSync(gif.path);
+        });
 
-    // Save the gif
-    await result.saveFiles("./temp/" + req.body.name + ".gif");
-
-    // Remove files
-    for(const i in fileArr)
+    })
+    .catch((err) =>
     {
-        fs.rmSync(fileArr[i]);
-    }
-
-    // TODO: Upload to a s3 bucket
-
-    res.contentType("application/json")
-        .send({"status": 200});
+        res.status(500).contentType("application/json")
+            .send({
+                "status": 500,
+                "message": "Failed to generate a gif."
+            });
+    })
+    .finally(() => {
+        removeFilesSync(files);
+    })
 });
 
 export { router as APIRouter }
