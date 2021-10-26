@@ -31,6 +31,8 @@ router.post("/create", async (req, res) => {
         return;
     }
 
+    const featured = req.body.featured && req.body.featured == "true";
+
     // Save uploaded files
     const files = await downloadFiles(req.files.files as UploadedFile[]);
 
@@ -38,7 +40,7 @@ router.post("/create", async (req, res) => {
     generateGif(files, req.body.delay || 100).then((gif) =>
     {
         // Upload GIF to s3
-        bucket.uploadFile(gif.path, gif.id + ".gif", req.body.featured || false).then(() =>
+        bucket.uploadFile(gif.path, gif.id + ".gif", featured).then(() =>
         {
             db.RegisterGif(gif.id, gif.path).then(() =>
             {
