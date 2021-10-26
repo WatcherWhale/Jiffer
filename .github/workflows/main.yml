@@ -2,9 +2,9 @@ name: Test compilation of all projects
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, workflows ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, workflows ]
 
   workflow_dispatch:
 
