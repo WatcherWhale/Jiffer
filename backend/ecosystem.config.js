@@ -9,7 +9,7 @@ module.exports = {
       NODE_ENV: "production"
     },
     env_development: {
-      instances: 1,
+      instances: -1,
       watch: [
         "./dist/*"
       ],

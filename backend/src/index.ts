@@ -1,3 +1,4 @@
+import process from 'process';
 import express from 'express';
 import fileUpload from 'express-fileupload';
 import { APIRouter } from './api';

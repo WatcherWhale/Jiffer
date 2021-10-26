@@ -4,9 +4,12 @@
   "description": "The Jiffer backend",
   "main": "dist/index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "pm2 start --env development && npm run watch",
     "build": "tsc",
-    "watch": "npm run build -- --watch"
+    "watch": "npm run build -- --watch",
+    "stop": "pm2 stop jiffer-backend",
+    "production": "pm2 start --env production",
+    "delete": "pm2 delete jiffer-backend"
   },
   "author": "",
   "license": "ISC",
