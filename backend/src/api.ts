@@ -1,14 +1,13 @@
 import express from 'express';
-import {UploadedFile} from 'express-fileupload';
-import {Bucket} from './helpers/bucket';
+import { UploadedFile } from 'express-fileupload';
+import { Bucket } from './helpers/bucket';
 import { Database } from './helpers/database';
-import {getFiles, removeFilesSync} from './helpers/files';
-import {v4 as uuid} from 'uuid';
-
-const config = require('../config.json');
+import { getFiles } from './helpers/files';
+import { v4 as uuid } from 'uuid';
+import { Config } from './helpers/config';
 
 const router = express.Router();
-const bucket = new Bucket(config.bucket.name, config.bucket.region);
+const bucket = new Bucket(Config.bucket.name, Config.bucket.region);
 const db = new Database();
 
 router.get("/pictures/:id", async (req, res) => {

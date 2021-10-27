@@ -2,9 +2,9 @@ import express from 'express';
 import fileUpload from 'express-fileupload';
 import { APIRouter } from './api';
 import { AuthMiddleware } from './authentication';
+import { Config } from './helpers/config';
 
 const app = express();
-const config = require('../config.json');
 
 // Middleware
 app.use(express.json());
@@ -23,4 +23,4 @@ app.use((req, res, next) => {
         .send({status: 404});
 });
 
-app.listen(config.port);
+app.listen(Config.port);
