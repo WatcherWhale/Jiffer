@@ -1,3 +1,4 @@
+import process from 'process';
 import express from 'express';
 import fileUpload from 'express-fileupload';
 import { APIRouter } from './api';
@@ -23,4 +24,7 @@ app.use((req, res, next) => {
         .send({status: 404});
 });
 
-app.listen(Config.port);
+// Start Server
+app.listen(Config.port, () => {
+    console.log("Server started on port " + Config.port);
+});
