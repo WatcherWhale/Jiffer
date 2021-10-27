@@ -1,3 +1,4 @@
+import process from 'process';
 import express from 'express';
 import fileUpload from 'express-fileupload';
 import { APIRouter } from './api';
@@ -17,4 +18,6 @@ app.use(AuthMiddleware);
 // Register Routes
 app.use("/api/v1", APIRouter);
 
-app.listen(config.port);
+app.listen(config.port, () => {
+    console.log("Server started on port " + config.port);
+});
