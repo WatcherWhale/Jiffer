@@ -1,7 +1,8 @@
 import path from "path";
 import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import {IFile} from "../types/Interfaces";
-import {Readable} from "stream";
+import {Stream} from "stream";
+import {toBuffer} from "./streams";
 
 export class Bucket
 {
@@ -12,15 +13,21 @@ export class Bucket
         this.client = new S3Client({region: region});
     }
 
-    public async getFile(bucketPath: string) : Promise<Readable | ReadableStream | Blob | undefined>
+    public async getFile(bucketPath: string) : Promise<Buffer | undefined>
     {
         const params = {
             Bucket: this.bucketName,
             Key: bucketPath,
         }
 
-        const file = await this.client.send(new GetObjectCommand(params));
-        return file.Body;
+        this.client.send(new GetObjectCommand(params)).then(file => {
+            return toBuffer(file.Body as Stream);
+        })
+        .catch(() => {
+            return undefined;
+        });
+
+        return undefined;
     }
 
     public async uploadFiles(dir: string, files: IFile[])

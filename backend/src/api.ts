@@ -13,19 +13,32 @@ const db = new Database();
 router.get("/pictures/:id", async (req, res) => {
     db.GetGif(req.params["id"]).then(async (gif) => {
 
+        // Does the gif exist in the database
         if(!gif)
         {
             res.status(404).send({status: 404, message: "Image expired or not found."});
             return;
         }
 
+        // Is the gif still processing
         if(gif.processing)
         {
             res.status(404).send({status: 404, message: "Image is still processing."});
             return;
         }
 
-        res.contentType("image/gif").send(await bucket.getFile(gif.file));
+        // Get the gif from the S3 bucket
+        const file = await bucket.getFile(gif.file);
+
+        // Check if the file exists in the bucket
+        if(!file)
+        {
+            res.status(404).send({status: 404, message: "Image file is not found."});
+            return;
+        }
+
+        // Send the file
+        res.contentType("image/gif").send(file);
     })
     .catch(() => {
         res.status(500).send({status: 500});

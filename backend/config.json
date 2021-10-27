@@ -2,7 +2,7 @@
     "port": 8080,
     "bucket": {
         "region": "us-east-1",
-        "name": "ict-arch-testbucket"
+        "name": "jiffer"
     },
     "db": {
         "host": "",
