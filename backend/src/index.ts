@@ -15,6 +15,12 @@ app.use(fileUpload({
 app.use(AuthMiddleware);
 
 // Register Routes
-app.use("/api/v1", APIRouter);
+app.use("/api", APIRouter);
+
+// 404 Error
+app.use((req, res, next) => {
+    res.status(404).contentType("application/json")
+        .send({status: 404});
+});
 
 app.listen(config.port);

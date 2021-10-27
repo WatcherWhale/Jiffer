@@ -1,6 +1,7 @@
-import fs from "fs";
 import path from "path";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import {IFile} from "../types/Interfaces";
+import {Readable} from "stream";
 
 export class Bucket
 {
@@ -11,22 +12,34 @@ export class Bucket
         this.client = new S3Client({region: region});
     }
 
-    public async uploadFile(filePath: string, fileName: string, featured: boolean = false) : Promise<string>
+    public async getFile(bucketPath: string) : Promise<Readable | ReadableStream | Blob | undefined>
     {
-        const folder = featured ? "featured" : "gifs";
-        const objectPath = path.join(folder, fileName);
+        const params = {
+            Bucket: this.bucketName,
+            Key: bucketPath,
+        }
 
-        await this.uploadFileToS3(filePath, objectPath);
-
-        return objectPath;
+        const file = await this.client.send(new GetObjectCommand(params));
+        return file.Body;
     }
 
-    private async uploadFileToS3(path: string, bucketPath: string)
+    public async uploadFiles(dir: string, files: IFile[])
+    {
+        for(const i in files)
+        {
+            const file = files[i];
+            const objPath = path.join(dir, file.fileName);
+
+            await this.uploadFile(objPath, file.data);
+        }
+    }
+
+    public async uploadFile(bucketPath: string, data: Buffer)
     {
         const uploadParams = {
             Bucket: this.bucketName,
             Key: bucketPath,
-            Body: fs.readFileSync(path),
+            Body: data,
         }
 
         return await this.client.send(new PutObjectCommand(uploadParams));
