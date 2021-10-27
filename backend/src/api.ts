@@ -13,6 +13,12 @@ const db = new Database();
 router.get("/pictures/:id", async (req, res) => {
     db.GetGif(req.params["id"]).then(async (gif) => {
 
+        if(!gif)
+        {
+            res.status(404).send({status: 404, message: "Image expired or not found."});
+            return;
+        }
+
         if(gif.processing)
         {
             res.status(404).send({status: 404, message: "Image is still processing."});

@@ -9,7 +9,7 @@ export class Database
         // TODO: Register gif in RDS
     }
 
-    public async GetGif(id: string) : Promise<IGif>
+    public async GetGif(id: string) : Promise<IGif | undefined>
     {
         // TODO: Get GIF data from database
         return {id: "", file: "", expires: 0, processing: false}

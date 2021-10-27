@@ -1,14 +1,22 @@
-interface IConfig
+export interface IConfig
 {
     port: number
-
     bucket: IBucket
+    db: IDatabase
 }
 
-interface IBucket
+export interface IBucket
 {
     region: string
     name: string
+}
+
+export interface IDatabase
+{
+    host: string
+    user: string
+    password: string
+    port?: number
 }
 
 const config : IConfig = require("../../config.json");

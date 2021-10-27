@@ -3,5 +3,10 @@
     "bucket": {
         "region": "us-east-1",
         "name": "ict-arch-testbucket"
+    },
+    "db": {
+        "host": "",
+        "user": "",
+        "password": ""
     }
 }
