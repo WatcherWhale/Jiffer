@@ -1,23 +1,20 @@
 import {UploadedFile} from "express-fileupload";
 import fs from "fs";
-import path from "path";
+import {IFile} from "../types/Interfaces";
 
-export async function downloadFiles(files: UploadedFile[]) : Promise<string[]>
+export function getFiles(files: UploadedFile[]) : IFile[]
 {
-    // Create the temp folder if it doesn't exists
-    if(!fs.existsSync("./temp"))
-    {
-        fs.mkdirSync("./temp");
-    }
-
     // Save uploaded files
-    const fileArr: string[] = [];
+    const fileArr: IFile[] = [];
 
     for(const i in files)
     {
-        const file = path.join("./temp/", files[i].name);
-        await files[i].mv(file);
-        fileArr.push(file)
+        const file = files[i];
+
+        fileArr.push({
+            fileName: file.name,
+            data: file.data
+        });
     }
 
     return fileArr;

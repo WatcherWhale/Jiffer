@@ -1,18 +1,51 @@
-import fs from 'fs';
 import express from 'express';
-import {UploadedFile} from 'express-fileupload';
-import {Bucket} from './helpers/bucket';
+import { UploadedFile } from 'express-fileupload';
+import { Bucket } from './helpers/bucket';
 import { Database } from './helpers/database';
-import { generateGif } from './helpers/gif';
-import {downloadFiles, removeFilesSync} from './helpers/files';
-
-const config = require('../config.json');
+import { getFiles } from './helpers/files';
+import { v4 as uuid } from 'uuid';
+import { Config } from './helpers/config';
 
 const router = express.Router();
-const bucket = new Bucket(config.bucket.name, config.bucket.region);
+const bucket = new Bucket(Config.bucket.name, Config.bucket.region);
 const db = new Database();
 
-router.post("/create", async (req, res) => {
+router.get("/pictures/:id", async (req, res) => {
+    db.GetGif(req.params["id"]).then(async (gif) => {
+
+        // Does the gif exist in the database
+        if(!gif)
+        {
+            res.status(404).send({status: 404, message: "Image expired or not found."});
+            return;
+        }
+
+        // Is the gif still processing
+        if(gif.processing)
+        {
+            res.status(404).send({status: 404, message: "Image is still processing."});
+            return;
+        }
+
+        // Get the gif from the S3 bucket
+        const file = await bucket.getFile(gif.file);
+
+        // Check if the file exists in the bucket
+        if(!file)
+        {
+            res.status(404).send({status: 404, message: "Image file is not found."});
+            return;
+        }
+
+        // Send the file
+        res.contentType("image/gif").send(file);
+    })
+    .catch(() => {
+        res.status(500).send({status: 500});
+    })
+});
+
+router.post("/pictures", async (req, res) => {
 
     // Check if the user is authenticated
     if(!req.authenticated)
@@ -31,60 +64,26 @@ router.post("/create", async (req, res) => {
         return;
     }
 
-    const featured = req.body.featured && req.body.featured == "true";
+    // Create a unique GIF id
+    const id = uuid();
 
-    // Save uploaded files
-    const files = await downloadFiles(req.files.files as UploadedFile[]);
-
-    // Generate GIF
-    generateGif(files, req.body.delay || 100).then((gif) =>
-    {
-        // Upload GIF to s3
-        bucket.uploadFile(gif.path, gif.id + ".gif", featured).then(() =>
-        {
-            db.RegisterGif(gif.id, gif.path).then(() =>
-            {
-                // Send OK message
-                res.contentType("application/json")
-                    .send({"status": 200});
-            })
-            .catch((err) =>
-            {
-                res.status(500).contentType("application/json")
-                    .send({
-                        "status": 500,
-                        "message": "Failed to process gif."
-                    });
-            })
-
-        })
-        .catch((err) =>
-        {
-            res.status(500).contentType("application/json")
-                .send({
-                    "status": 500,
-                    "message": "Failed to process gif."
-                });
-
-        })
-        .finally(() =>
-        {
-            // Always remove the generated GIF
-            fs.rmSync(gif.path);
-        });
-
+    // Save uploaded files to s3
+    const files = getFiles(req.files.files as UploadedFile[]);
+    bucket.uploadFiles(id, files).then(() => {
+        res.contentType("application/json")
+            .send({
+                "status": 200,
+                "message": "Started processing files.",
+                "id": id
+            });
     })
-    .catch((err) =>
-    {
+    .catch((err) => {
         res.status(500).contentType("application/json")
             .send({
                 "status": 500,
-                "message": "Failed to generate a gif."
-            });
-    })
-    .finally(() => {
-        removeFilesSync(files);
-    })
+                "message": "Failed to process files."
+        });
+    });
 });
 
 export { router as APIRouter }

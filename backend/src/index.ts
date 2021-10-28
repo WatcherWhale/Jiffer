@@ -3,9 +3,9 @@ import express from 'express';
 import fileUpload from 'express-fileupload';
 import { APIRouter } from './api';
 import { AuthMiddleware } from './authentication';
+import { Config } from './helpers/config';
 
 const app = express();
-const config = require('../config.json');
 
 // Middleware
 app.use(express.json());
@@ -16,8 +16,15 @@ app.use(fileUpload({
 app.use(AuthMiddleware);
 
 // Register Routes
-app.use("/api/v1", APIRouter);
+app.use("/api", APIRouter);
 
-app.listen(config.port, () => {
-    console.log("Server started on port " + config.port);
+// 404 Error
+app.use((req, res, next) => {
+    res.status(404).contentType("application/json")
+        .send({status: 404});
+});
+
+// Start Server
+app.listen(Config.port, () => {
+    console.log("Server started on port " + Config.port);
 });

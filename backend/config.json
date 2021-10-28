@@ -1,8 +1,12 @@
 {
     "port": 8080,
-    "convert-key": "axikhXdmDlqY2I5R",
     "bucket": {
         "region": "us-east-1",
-        "name": "ict-arch-testbucket"
+        "name": "jiffer"
+    },
+    "db": {
+        "host": "",
+        "user": "",
+        "password": ""
     }
 }
