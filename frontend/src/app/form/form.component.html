@@ -1,0 +1,24 @@
+<form action="http://localhost:8080/api/v1/create" method="POST" enctype="multipart/form-data">
+    <div class="file is-danger">
+      <label class="file-label">
+        <input class="file-input" type="file" multiple name="files" accept="image/png, image/jpeg">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-folder-open"></i>
+          </span>
+          <span class="file-label">
+            Browse
+          </span>
+        </span>
+      </label>
+    </div>
+  
+  
+    <br>
+    <input class="input is-danger is-rounded" type="text" name="name">
+    <br>
+    <input class="input is-danger is-rounded" type="number" value="100" name="delay">
+    <br>
+    <button class="button is-danger" type="submit"> Submit </button>
+  
+  </form>
