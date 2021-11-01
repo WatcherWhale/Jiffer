@@ -1,0 +1,12 @@
+@import "~bulma-slider";
+
+.card{
+    width:60%;
+    height: 600px;
+    color:coral;
+    margin-top:20px;
+    border:1px solid coral;
+}
+a{
+    color:lightcoral;
+}

@@ -1,0 +1,20 @@
+header{
+    background-color: darkred;
+    height: 50px;
+}
+
+nav{
+    float:right;
+}
+
+a{
+    color:coral;
+}
+
+span{
+    color:coral;
+    font-family: 'Courier New', monospace;
+    font-size: 40px;
+    font-weight: 600;
+    margin-left: 20px;
+}
