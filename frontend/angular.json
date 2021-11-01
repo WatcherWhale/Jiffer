@@ -31,7 +31,8 @@
               "node_modules/bulma/css/bulma.css"
             ],
             "scripts": [
-              "node_modules/@fortawesome/fontawesome-free/js/all.js"
+              "node_modules/@fortawesome/fontawesome-free/js/all.js",
+              "node_modules/bulma-carousel/dist/bulma-carousel.min.js"
             ]
           },
           "configurations": {

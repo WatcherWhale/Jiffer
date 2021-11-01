@@ -1,12 +1,35 @@
 @import "~bulma-slider";
 
 .card{
-    width:60%;
+    width:620px;
     height: 600px;
-    color:coral;
+    color:white;
     margin-top:20px;
-    border:1px solid coral;
+    margin-left:10px;
+    background-color:rgba(241, 113, 113, 0.322);
 }
 a{
-    color:lightcoral;
+    color:rgb(228, 69, 82);
+}
+
+.checkbox{
+    margin-left:30px;
+}
+#name{
+    width: 450px;
+    background-color:rgba(255, 255, 255, 0.63);
+    color:red;
+}
+
+#url{
+    width:300px;
+    background-color:rgba(255, 255, 255, 0.63);
+    color:red;
+}
+p{
+    font-weight: bold;
+    font-size: large;
+}
+#urltekst{
+    margin-left:40px;
 }

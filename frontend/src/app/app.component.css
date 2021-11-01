@@ -1,20 +1,31 @@
 header{
-    background-color: darkred;
+    background-color: rgba(73, 13, 13, 0.329);
     height: 50px;
 }
 
 nav{
     float:right;
+    margin-right: 80px;
 }
 
 a{
-    color:coral;
+    color:white;
+}
+a:hover{
+    color:red;
 }
 
 span{
-    color:coral;
+    color:rgb(255, 255, 255);
     font-family: 'Courier New', monospace;
     font-size: 40px;
     font-weight: 600;
     margin-left: 20px;
+}
+
+app-form{
+    float:left;
+}
+app-carousel{
+    float:right;
 }

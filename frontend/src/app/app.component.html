@@ -2,13 +2,17 @@
     <span>J  i  f  f  e  r </span>
     <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-            <li><a href=#>Bulma? </a></li>
-            <li><a href=#>Bulma?? </a></li>
-            <li><a href=#>Bulma??? </a></li>
+            <li><a href=# (click)="Featured()">  Featured GIF <i class="fas fa-photo-video"></i></a></li>
+            <li><a href=# (click)="LogOut()">  Log Out <i class="fas fa-sign-out-alt"></i></a></li>
+            <li><a href=# (click)="User()">  User Agreement <i class="far fa-handshake"></i></a></li>
+            <li><a href=# (click)="Home()"> Home <i class="fas fa-home"></i></a></li>
         </ul>
     </nav>
 </header>
 
 
-
-<app-form></app-form>
+<app-form *ngIf="home"></app-form>
+<app-carousel *ngIf="home"></app-carousel>
+<app-terms *ngIf="user"></app-terms>
+<app-login *ngIf="logOut"></app-login>
+<app-featured *ngIf="featured"></app-featured>
