@@ -1,11 +1,8 @@
-
-<section class="section">
-    <p class="title is-3">Preview photos:</p>
-    <div class="container">
-      <div class="carousel" id="carousel">
-        <div class="item" *ngFor="let image of images">
-          <img src="{{image}}" alt="">
-        </div>
-      </div>
+<p class="title is-3">Preview photos:</p>
+<div class="container">
+  <div class="carousel">
+    <div class="item-{{i + 1}}" *ngFor="let image of images; let i = index">
+      <img src="{{image}}" alt="">
     </div>
-  </section>
+  </div>
+</div>
