@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "pm2 start --env development && npm run watch",
-    "build": "tsc",
+    "build": "tsc --build",
     "watch": "npm run build -- --watch",
+    "clean": "npm run build -- --clean",
     "stop": "pm2 stop jiffer-backend",
     "production": "pm2 start --env production",
     "delete": "pm2 delete jiffer-backend"

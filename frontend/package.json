@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "clean": "rm -r dist",
     "test": "ng test"
   },
   "private": true,
