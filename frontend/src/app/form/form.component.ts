@@ -14,7 +14,6 @@ export class FormComponent implements OnInit {
   action :string = "http://localhost:8080/api/v1/create";
 
   ngOnInit(): void {
-    document.getElementsByTagName("form")[0].setAttribute("action", this.action)
     bulmaSlider.attach();
   }
 }

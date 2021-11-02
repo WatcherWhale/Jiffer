@@ -8,8 +8,7 @@ declare var bulmaCarousel: any;
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent implements OnInit {
-  recived = false;
-  //images :any= [];
+  recieved = false;
   images = [
     "https://img.freepik.com/free-vector/flame-abstract-logo_95982-235.jpg?size=338&ext=jpg",
     "https://img.freepik.com/free-vector/mic-leaf-logo_83874-139.jpg?size=338&ext=jpg",
@@ -25,7 +24,7 @@ export class CarouselComponent implements OnInit {
     document.addEventListener("DOMContentLoaded", () => {
       bulmaCarousel.attach('.carousel', {
         slidesToScroll: 1,
-        slidesToShow:4,
+        slidesToShow:3,
         infinite: true,
         autoplay: true
       });

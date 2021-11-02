@@ -1,5 +1,6 @@
 html{
     background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm283-nunny-020-a.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=c91ddf5a242f6696d290fab2bd3629f9");
+    /* make static asset when s3 bucketing ^^^^ */
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
