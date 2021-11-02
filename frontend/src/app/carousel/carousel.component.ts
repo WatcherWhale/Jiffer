@@ -21,13 +21,13 @@ export class CarouselComponent implements OnInit {
 
   ngOnInit(): void {
 
-    document.addEventListener("DOMContentLoaded", () => {
-      bulmaCarousel.attach('.carousel', {
+      setInterval(()=>{
+        bulmaCarousel.attach('.carousel', {
         slidesToScroll: 1,
         slidesToShow:3,
         infinite: true,
         autoplay: true
       });
-    });
+      },100)
   }
 }
