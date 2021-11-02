@@ -1,0 +1,8 @@
+<p class="title is-5">Photos:</p>     <!-- *ngIf="recieved" bij implementatie-->
+<div class="container">
+  <div class="carousel">
+    <div class="item-{{i + 1}}" *ngFor="let image of images; let i = index">
+      <img src="{{image}}" alt="">
+    </div>
+  </div>
+</div>

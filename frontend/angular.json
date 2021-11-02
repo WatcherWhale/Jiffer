@@ -27,17 +27,24 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bulma/css/bulma.css",
+              "node_modules/bulma-carousel/dist/css/bulma-carousel.min.css",
+              "node_modules/bulma-slider/dist/css/bulma-slider.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@fortawesome/fontawesome-free/js/all.js",
+              "node_modules/bulma-carousel/dist/js/bulma-carousel.min.js",
+              "node_modules/bulma-slider/dist/js/bulma-slider.min.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
