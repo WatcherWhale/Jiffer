@@ -11,7 +11,8 @@ module.exports = {
     env_development: {
       instances: -1,
       watch: [
-        "./dist/*"
+        "./dist/*",
+        "./config.json"
       ],
       NODE_ENV: "development"
     }

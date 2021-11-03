@@ -1,8 +1,15 @@
 {
     "port": 8080,
-    "bucket": {
-        "region": "us-east-1",
-        "name": "jiffer"
+    "useStaticBucket": true,
+    "buckets": {
+        "gifs": {
+            "region": "us-east-1",
+            "name": "jiffer"
+        },
+        "static": {
+            "region": "us-east-1",
+            "name": "jiffer-static"
+        }
     },
     "db": {
         "host": "",

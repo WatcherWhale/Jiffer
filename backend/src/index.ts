@@ -1,9 +1,9 @@
-import process from 'process';
 import express from 'express';
 import fileUpload from 'express-fileupload';
 import { APIRouter } from './api';
 import { AuthMiddleware } from './authentication';
 import { Config } from './helpers/config';
+import {Static} from './static';
 
 const app = express();
 
@@ -15,8 +15,11 @@ app.use(fileUpload({
 }));
 app.use(AuthMiddleware);
 
-// Register Routes
+// Register API
 app.use("/api", APIRouter);
+
+// Register static assets
+app.use(Static);
 
 // 404 Error
 app.use((req, res, next) => {
