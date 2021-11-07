@@ -130,3 +130,5 @@ dist
 
 
 temp/
+static/
+static

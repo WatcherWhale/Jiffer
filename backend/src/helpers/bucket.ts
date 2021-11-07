@@ -20,14 +20,15 @@ export class Bucket
             Key: bucketPath,
         }
 
-        this.client.send(new GetObjectCommand(params)).then(file => {
-            return toBuffer(file.Body as Stream);
+        return new Promise((resolve, reject) => {
+            this.client.send(new GetObjectCommand(params)).then(file => {
+                resolve(toBuffer(file.Body as Stream));
+            })
+            .catch((e) => {
+                reject(e);
+            });
         })
-        .catch(() => {
-            return undefined;
-        });
 
-        return undefined;
     }
 
     public async uploadFiles(dir: string, files: IFile[])

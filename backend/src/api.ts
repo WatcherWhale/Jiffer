@@ -7,7 +7,7 @@ import { v4 as uuid } from 'uuid';
 import { Config } from './helpers/config';
 
 const router = express.Router();
-const bucket = new Bucket(Config.bucket.name, Config.bucket.region);
+const bucket = new Bucket(Config.buckets.gifs.name, Config.buckets.gifs.region);
 const db = new Database();
 
 router.get("/pictures/:id", async (req, res) => {

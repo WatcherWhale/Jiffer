@@ -1,8 +1,15 @@
 export interface IConfig
 {
     port: number
-    bucket: IBucket
+    useStaticBucket: boolean;
+    buckets: IBuckets
     db: IDatabase
+}
+
+export interface IBuckets
+{
+    gifs: IBucket;
+    static: IBucket;
 }
 
 export interface IBucket

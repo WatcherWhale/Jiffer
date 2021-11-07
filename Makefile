@@ -24,4 +24,5 @@ package:
 	cp -r frontend/dist/frontend dist/static
 	# On Linux systems create a .tar.gz
 	bsdtar -a -cf jiffer.tar.gz -C dist .
+	bsdtar -a -cf jiffer-frontend.tar.gz -C dist/static .
 
