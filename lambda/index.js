@@ -1,13 +1,25 @@
+const process = require('process');
 const aws = require('aws-sdk');
 const s3 = new aws.S3({ apiVersion: '2006-03-01' });
+const fs = require('fs');
 
 const path = require('path');
-const fs = require('fs');
-const GM = require('gm');
-const {resolve} = require('dns');
+const {Readable} = require('stream');
+
+const BIN_PATH = process.env['LAMBDA_TASK_ROOT'] + "/graphicsmagick/bin/";
+const GM = require('gm').subClass({appPath: BIN_PATH});
+
+
+aws.config.update({
+    maxRetries: 2,
+    httpOptions: {
+        timeout: 30000,
+        connectTimeout: 50000
+    }
+});
 
 console.log("Starting lambda...");
-exports.handler = async (event, context) => {
+const createGif = async (event, context) => {
     return new Promise(async (resolve, reject) => {
         console.log("Lambda is running.")
 
@@ -34,14 +46,17 @@ exports.handler = async (event, context) => {
                 params.Key = path.join(json.key, file);
                 const object = await s3.getObject(params).promise();
 
-                gif = gif.in(object.Body, i + ".png");
+                console.log("Downloaded " + file);
+
+                fs.writeFileSync("/tmp/" + i + ".png", object.Body)
+                gif = gif.in("/tmp/" + i + ".png");
             }
 
             console.log("Downloaded files");
 
             gif = gif.delay(json.delay);
-            gif.toBuffer(async (err, buffer) => {
-                console.log("created gif")
+
+            gif.write("/tmp/gif.gif", async (err) => {
                 if(err)
                 {
                     console.log(err);
@@ -49,16 +64,26 @@ exports.handler = async (event, context) => {
                     return;
                 }
 
+                console.log("Created gif")
+
+                const gifKey = path.join(json.key, json.key + ".gif");
+
                 await s3.putObject({
                     Bucket: bucket,
-                    Key: path.join(json.key, json.key + ".gif"),
-                    Body: buffer
+                    Key: gifKey,
+                    Body: fs.readFileSync("/tmp/gif.gif")
                 }).promise();
 
-                resolve(buffer);
+                for(const i in json.files)
+                {
+                    fs.rmSync("/tmp/" + i + ".png");
+                }
+
+                fs.rmSync("/tmp/gif.gif");
+
+                resolve(gifKey);
 
                 console.log("Created gif successfully");
-
             });
         }
         catch (err)
@@ -68,3 +93,16 @@ exports.handler = async (event, context) => {
         }
     });
 }
+
+// https://gist.github.com/wpscholar/270005d42b860b1c33cf5ab25b37928a
+function buffer2Stream(buff)
+{
+    return new Readable({
+        read() {
+            this.push(buff);
+            this.push(null);
+        }
+    });
+}
+
+exports.handler = createGif;
