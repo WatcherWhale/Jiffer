@@ -55,6 +55,7 @@ const createGif = async (event, context) => {
             console.log("Downloaded files");
 
             gif = gif.delay(json.delay);
+            gif = gif.quality(json.quality);
 
             gif.write("/tmp/gif.gif", async (err) => {
                 if(err)
