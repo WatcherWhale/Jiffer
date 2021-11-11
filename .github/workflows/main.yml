@@ -27,7 +27,7 @@ jobs:
           npm install
           npm run build
 
-          - name: Build lambda
-            run: |
-              cd lambda
-              docker build -t lambda .
+      - name: Build lambda
+        run: |
+          cd lambda
+          docker build -t lambda .
