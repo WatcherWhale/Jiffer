@@ -9,25 +9,31 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  Backend:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build Backend
+      - name: Install & Build
         run: |
           cd backend
           npm install
           npm run build
 
-      - name: Build Frontend
+  Frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install & Build
         run: |
           cd frontend
           npm install
           npm run build
 
-  docker:
+  Lambda:
     runs-on: ubuntu-latest
 
     steps:
