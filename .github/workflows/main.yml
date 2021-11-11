@@ -27,6 +27,9 @@ jobs:
           npm install
           npm run build
 
+  docker:
+    runs-on: ubuntu-latest
+
       - name: Build lambda
         run: |
           cd lambda
