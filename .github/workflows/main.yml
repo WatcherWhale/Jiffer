@@ -30,6 +30,8 @@ jobs:
   docker:
     runs-on: ubuntu-latest
 
+    steps:
+
       - name: Build lambda
         run: |
           cd lambda
