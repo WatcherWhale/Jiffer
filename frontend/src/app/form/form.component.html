@@ -1,64 +1,75 @@
 <div class="card">
-  <div class="card-content">
-    <div class="content">
+    <div class="card-content">
+        <div class="content">
+            <form enctype="multipart/form-data" *ngIf="!imageUrl">
+                <fieldset [disabled]="submitted">
+                    <p>Image-To-GIF converter </p>
+                    <div class="field">
+                        <label class="label">Name of your GIF:</label>
+                        <input id="name"class="input is-danger is-rounded" type="text" name="name">
+                    </div>
 
+                    <div class="field">
+                        <label class="label">Frame Delay: </label>
+                        <input id="delaySlider" class="slider has-output is-fullwidth is-danger" min="0" max="300" value="100" step="1" type="range" name="delay">
+                        <output for="delaySlider">100</output>
+                    </div>
 
+                    <div class="field">
+                        <label class="label">Quality: </label>
+                        <input id="qualitySlider" class="slider has-output is-fullwidth is-danger" min="0" max="10" value="10" step="1" type="range" name="quality">
+                        <output for="qualitySlider">10</output>
+                    </div>
 
+                    <div class="field">
+                        Featured GIF? 
+                        <div class="control">
+                            <label class="radio">
+                                <input type="radio" name="question">
+                                Yes
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="question" checked>
+                                No
+                            </label>
+                        </div>
+                    </div>
 
-      <form action="{{action}}" method="POST" enctype="multipart/form-data">
-    
-          <p>Image-To-GIF converter </p>
+                    <br>
 
-          <br>
-          <label>Name of your GIF:</label>
-          <br>
-          <input id="name"class="input is-danger is-rounded" type="text" name="name">
-          <br>
-          <br>
-          <label>Frame Delay: </label>
-          <input id="sliderWithValue" class="slider has-output is-fullwidth is-danger" min="0" max="300" value="100" step="1" type="range">
-          <output for="sliderWithValue">100</output>
-          <br>
+                    <div class="file is-danger">
+                        <label class="file-label">
+                            <input class="file-input" type="file" multiple name="files" accept="image/png, image/jpeg">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-folder-open"></i>
+                                </span>
+                                <span class="file-label">
+                                Browse
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                </fieldset>
+            </form>
 
-          <div class="field">
-            Featured GIF? 
-            <div class="control">
-              <label class="radio">
-                <input type="radio" name="question">
-                Yes
-              </label>
-              <label class="radio">
-                <input type="radio" name="question" checked>
-                No
-              </label>
+            <div class="field">
+                <button class="button is-danger" [ngClass]="{'is-loading': submitted}" (click)="submit()" *ngIf="!imageUrl"> Submit </button>
             </div>
-          </div>
-          <br>
-          <div class="file is-danger">
-            <label class="file-label">
-            <input class="file-input" type="file" multiple name="files" accept="image/png, image/jpeg">
-              <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-folder-open"></i>
-                </span>
-                <span class="file-label">
-                Browse
-                </span>
-              </span>
-            </label>
-          </div>
-          <br>
-          <br>
-          <br> 
-          <br>
-          <br>
-          <button class="button is-danger" type="submit"> Submit </button>
-          <label id=urltekst> Your URL: </label>
-          <input id=url class="input is-danger is-rounded" type="text">
-  
-        </form>
 
-  
+            <figure class="image" *ngIf="imageUrl">
+                <img [src]="imageUrl" >
+            </figure>
+
+            <div class="field has-addons" *ngIf="imageUrl">
+                <div class="control">
+                    <input class="input is-danger is-rounded" type="text" readonly [value]="imageUrl">
+                </div>
+                <div class="control">
+                    <a class="button is-danger is-rounded">Copy</a>
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>

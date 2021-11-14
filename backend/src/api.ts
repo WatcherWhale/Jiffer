@@ -69,6 +69,22 @@ router.post("/pictures", async (req, res) => {
 
     // Save uploaded files to s3
     const files = getFiles(req.files.files as UploadedFile[]);
+
+    // Create json data
+    const jsonObj = {
+        key: id,
+        files: files.map(x => x.fileName),
+        delay: req.body.delay,
+        quality: req.body.quality
+    }
+
+    // Add json file
+    files.push({
+        fileName: id + ".json",
+        data: Buffer.from(JSON.stringify(jsonObj), 'utf-8')
+    });
+
+    // Uplaod all files
     bucket.uploadFiles(id, files).then(() => {
         res.contentType("application/json")
             .send({
