@@ -26,5 +26,13 @@ export interface IDatabase
     port?: number
 }
 
+export interface ICognito
+{
+    poolId: string
+    ClientId: string
+    poolRegion: string
+}
+
+
 const config : IConfig = require("../../config.json");
 export { config as Config };
