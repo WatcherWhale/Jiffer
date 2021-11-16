@@ -1,8 +1,12 @@
 # Jiffer Backend
 
-## Configure Server
+## Configuring
 
 Before starting a server a few things need to be put in check.
+
+## AWS
+
+Make sure the required services are running and configured in AWS.
 
 ### Credentials
 
