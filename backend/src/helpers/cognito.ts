@@ -1,14 +1,17 @@
-const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-const request = require('request');
-const jwkToPem = require('jwk-to-pem');
-const jwt = require('jsonwebtoken');
+import AmazonCognitoIdentity, {CognitoUserAttribute} from 'amazon-cognito-identity-js';
+import request from 'request';
+import jwkToPem from 'jwk-to-pem';
+import jwt from 'jsonwebtoken';
+import { Config } from './config';
+
+// TODO: Check if this piece of code is in fact needed, my bet is no.
 global.fetch = require('node-fetch');
 
-const poolData = {    
-  UserPoolId: "us-east-1_JN6nwxRw9", 
-  ClientId: "CoolKids",
-}; 
-const pool_region = 'us-east-1';
+const poolData = {
+  UserPoolId: Config.cognito.poolId,
+  ClientId: Config.cognito.clientId
+}
+const pool_region = Config.cognito.poolRegion;
 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 function registerUser(email :string, password :string) {
@@ -16,7 +19,8 @@ function registerUser(email :string, password :string) {
     const attributeList = [
       new AmazonCognitoIdentity.CognitoUserAttribute({ Name: "email", Value: email })
     ];
-    userPool.signUp(email, password, attributeList, null, function(err :any, result :any) {
+    // TODO: Check if I can fill in empty array or has to be null
+    userPool.signUp(email, password, attributeList, [], function(err :any, result :any) {
       if (err) {
         reject(err);
       } else {
@@ -73,8 +77,8 @@ function validateToken(token :any) {
           reject("Not a valid JWT token");
           return;
         }
-        var kid = decodedJwt.header.kid;
-        var pem = pems[kid];
+        var kid = decodedJwt.header.kid as string;
+        var pem = pems[kid] as string;
         if (!pem) {
           reject('Invalid token');
           return;
@@ -93,8 +97,4 @@ function validateToken(token :any) {
   })
 }
 
-module.exports = {
-    registerUser,
-    login,
-    validateToken,
-};
+export {registerUser, login, validateToken}
