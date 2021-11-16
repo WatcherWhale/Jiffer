@@ -1,9 +1,10 @@
 export interface IConfig
 {
     port: number
-    useStaticBucket: boolean;
+    useStaticBucket: boolean
     buckets: IBuckets
     db: IDatabase
+    cognito: ICognito
 }
 
 export interface IBuckets
@@ -29,7 +30,7 @@ export interface IDatabase
 export interface ICognito
 {
     poolId: string
-    ClientId: string
+    clientId: string
     poolRegion: string
 }
 
