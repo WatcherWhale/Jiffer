@@ -17,7 +17,10 @@ export class FormComponent implements OnInit {
   submitted: boolean = false;
 
   ngOnInit(): void {
-    document.addEventListener("DOMContentLoaded", () => bulmaSlider.attach())
+
+    setInterval(()=>{
+      bulmaSlider.attach()
+    },100)
   }
 
   submit() {
