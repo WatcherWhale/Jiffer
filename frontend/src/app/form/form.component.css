@@ -36,3 +36,7 @@ form {
 .has-addons {
     justify-content: center;
 }
+
+label{
+    margin-left:20px;
+}

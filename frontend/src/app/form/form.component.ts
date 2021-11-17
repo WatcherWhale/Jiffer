@@ -12,7 +12,7 @@ export class FormComponent implements OnInit {
   constructor() { }
 
   action: string = "http://localhost:8080/api/pictures";
-  imageUrl: string = "";
+  imageUrl: string = "aa";
   id: string = "";
   submitted: boolean = false;
 
@@ -47,6 +47,12 @@ export class FormComponent implements OnInit {
 
     xhr.open("post", this.action);
     xhr.send(data);
+  }
+
+  copied=false;
+  Copied()
+  {
+    this.copied=true;
   }
 
   check() {
