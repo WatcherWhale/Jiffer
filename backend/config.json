@@ -15,5 +15,11 @@
         "host": "",
         "user": "",
         "password": ""
+    },
+    "cognito": {
+        "poolId": "",
+        "clientId": "",
+        "poolRegion": ""
+
     }
 }

@@ -1,9 +1,10 @@
 export interface IConfig
 {
     port: number
-    useStaticBucket: boolean;
+    useStaticBucket: boolean
     buckets: IBuckets
     db: IDatabase
+    cognito: ICognito
 }
 
 export interface IBuckets
@@ -25,6 +26,14 @@ export interface IDatabase
     password: string
     port?: number
 }
+
+export interface ICognito
+{
+    poolId: string
+    clientId: string
+    poolRegion: string
+}
+
 
 const config : IConfig = require("../../config.json");
 export { config as Config };
