@@ -23,6 +23,7 @@
     "file-type": "^16.5.3",
     "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.5",
+    "mysql": "^2.18.1",
     "request": "^2.88.2",
     "uuid": "^8.3.2"
   },
