@@ -10,16 +10,31 @@ export class Database
         host: Config.db.host,
         user: Config.db.user,
         password: Config.db.password,
-        database: Config.db.port        //not sure if this is the port/name of the database?
+        port: Config.db.port
     })
 
-    constructor() {}
+    public async MakeDatabase()
+    {
+        this.pool.getConnection((err: string, connection: any)=>{
+            if(err)
+                console.log("connection with database failed :(")
+            console.log("connected")
+
+            connection.query('CREATE DATABASE IF NOT EXISTS JifferDB;')
+            connection.query('USE JifferDB;')
+            connection.query('CREATE TABLE IF NOT EXISTS gifs(uuid CHAR(36) NOT NULL PRIMARY KEY, name VARCHAR(50), path VARCHAR(100), featured TINYINT, creationDate DATE )')
+
+            connection.release()
+        })
+
+    }
 
     public async RegisterGif(id: string, path: string) : Promise<void>
     {
-        this.pool.getConnection((err :string,connection :any)=>{
+        this.pool.getConnection((err: string, connection: any)=>{
             if(err)
                 console.log("connection with database failed")
+            console.log("connected database")
             connection.query()
             connection.release()
         })
@@ -28,9 +43,10 @@ export class Database
     public async GetGif(id: string) : Promise<IGif | undefined>
     {
 
-        this.pool.GetConnection((err:string, connection:any)=>{
+        this.pool.GetConnection((err: string, connection: any)=>{
             if(err)
                 console.log("connection with database failed")
+            console.log("connected database")
 
             connection.query()
             connection.release()

@@ -24,7 +24,7 @@ export interface IDatabase
     host: string
     user: string
     password: string
-    port?: number
+    port: number
 }
 
 export interface ICognito
