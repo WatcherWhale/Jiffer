@@ -7,6 +7,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { TermsComponent } from './terms/terms.component';
 import { FeaturedComponent } from './featured/featured.component';
 import { LoginComponent } from './login/login.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginComponent } from './login/login.component';
     LoginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
