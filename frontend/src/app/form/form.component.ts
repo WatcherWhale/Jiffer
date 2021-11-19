@@ -49,6 +49,12 @@ export class FormComponent implements OnInit {
     xhr.send(data);
   }
 
+  copied=false;
+  Copied()
+  {
+    this.copied=true;
+  }
+
   check() {
     // TODO: Check if processing has been completed. Use setTimeout (5000ms) to check until gif is created.
     // TODO: If created set `this.imageUrl` to the gif url.
