@@ -2,6 +2,7 @@ import { PutObjectLockConfigurationCommand } from "@aws-sdk/client-s3";
 import { resolve } from "path/posix";
 import {IGif} from "../types/Interfaces";
 import { Config } from "./config";
+import { Bucket } from "./bucket";
 //import { Mysql } from "mysql";
 
 
@@ -73,12 +74,12 @@ export class Database
                     return
                 }
 
-                connection.query('SELECT * FROM gifs WHERE uuid=?', [ id ], (err:string, result:any)=>{
+                connection.query('SELECT path FROM gifs WHERE uuid=?', [ id ], (err: string, path: any)=>{
                     if(err){
                         reject(err)
                         return
                     }
-                    resolve(result)
+                    resolve(Bucket.prototype.getFile(path)) //this?, i'm flipping my head
                 })
                 connection.release()
             })
