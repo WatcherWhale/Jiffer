@@ -1,4 +1,5 @@
 import { PutObjectLockConfigurationCommand } from "@aws-sdk/client-s3";
+import { resolve } from "path/posix";
 import {IGif} from "../types/Interfaces";
 import { Config } from "./config";
 //import { Mysql } from "mysql";
@@ -41,33 +42,50 @@ export class Database
 
     public async RegisterGif(id: string, name:string, path: string, featured: boolean, creationDate: Date ) : Promise<void>
     {
-        this.pool.getConnection((err: string, connection: any)=>{
-            if(err)
-                console.log("connection with database failed")
-            console.log("connected with database")
-            
-            connection.query('INSERT INTO gifs VALUES (?, ?, ?, ?, ?)', { values: [ id, name, path, featured, creationDate ] }, (err: string, result: any)=>{
-                if(err)
-                    console.log("could not insert values in the database")
-            })
 
-            connection.release()
-        })
+            this.pool.getConnection((err: string, connection: any)=>{
+                return new Promise((reject)=>{                                  //used "promisifying" technique
+                    if(err){
+                        reject(err)
+                        return
+                    }
+            
+                    connection.query('INSERT INTO gifs VALUES (?, ?, ?, ?, ?)', [ id, name, path, featured, creationDate ], (err: string, result: any)=>{
+                        if(err){
+                            reject(err)
+                            return
+                        }
+                    })
+                    connection.release()
+                })
+                
+            })
+        
     }
 
     public async GetGif(id: string) : Promise<IGif | undefined>
     {
 
         this.pool.GetConnection((err: string, connection: any)=>{
-            if(err)
-                console.log("connection with database failed")
-            console.log("connected database")
+            return new Promise((resolve, reject)=>{
+                if(err){
+                    reject(err)
+                    return
+                }
 
-            connection.query()
+                connection.query('SELECT * FROM gifs WHERE uuid=?', [ id ], (err:string, result:any)=>{
+                    if(err){
+                        reject(err)
+                        return
+                    }
+                    resolve(result)
+                })
+                connection.release()
+            })
 
-            connection.release()
+            
         })
 
-        return {id: "", file: "", expires: 0, processing: false}
+        return {id: "", file: "", expires: 0, processing: false}    //dunno what you wanna do with this :3
     }
 }
