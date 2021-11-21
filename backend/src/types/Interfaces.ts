@@ -1,8 +1,9 @@
 export interface IGif
 {
-    id: string
-    file: string
-    expires: number
+    uuid: string
+    path: string
+    creationDate: Date
+    featured: boolean
     processing: boolean
 }
 
