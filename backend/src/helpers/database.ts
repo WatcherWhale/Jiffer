@@ -1,6 +1,7 @@
 import {IGif} from "../types/Interfaces";
 import { Config } from "./config";
 import mysql from 'mysql';
+import internal from "stream";
 
 
 export class Database
@@ -54,17 +55,14 @@ export class Database
         const connection = await this.getConnection();
         await this.query(connection, 'CREATE DATABASE IF NOT EXISTS JifferDB;');
         await this.query(connection, 'USE JifferDB;');
-
-        // TODO: make sure that there is a field called `processing` in the database
-        //  the lambda function will set this to `false` if the processing is done.
-        await this.query(connection, 'CREATE TABLE IF NOT EXISTS gifs(uuid CHAR(36) NOT NULL PRIMARY KEY, name VARCHAR(50), path VARCHAR(100), featured TINYINT, creationDate DATE )');
+        await this.query(connection, 'CREATE TABLE IF NOT EXISTS gifs(uuid CHAR(36) NOT NULL PRIMARY KEY, name VARCHAR(50), path VARCHAR(100), featured BOOL, creationDate DATE, processing BOOL )');
         connection.release();
     }
 
-    public async RegisterGif(id: string, name:string, path: string, featured: boolean, creationDate: Date ) : Promise<void>
+    public async RegisterGif(id: string, name:string, path: string, featured: boolean, creationDate: Date, processing : boolean ) : Promise<void>
     {
         const connection = await this.getConnection();
-        await this.query(connection, 'INSERT INTO gifs VALUES (?, ?, ?, ?, ?)', [ id, name, path, featured, creationDate ]);
+        await this.query(connection, 'INSERT INTO gifs VALUES (?, ?, ?, ?, ?, ?)', [ id, name, path, featured, creationDate, processing ]);
         connection.release();
     }
 
