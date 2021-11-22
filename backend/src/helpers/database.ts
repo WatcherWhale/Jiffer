@@ -1,8 +1,6 @@
 import {IGif} from "../types/Interfaces";
 import { Config } from "./config";
 import mysql from 'mysql';
-import internal from "stream";
-
 
 export class Database
 {
@@ -50,26 +48,26 @@ export class Database
         });
     }
 
-    public async MakeDatabase()
+    public async MakeDatabase()     //use this, or the database.sql
     {
         const connection = await this.getConnection();
         await this.query(connection, 'CREATE DATABASE IF NOT EXISTS JifferDB;');
         await this.query(connection, 'USE JifferDB;');
-        await this.query(connection, 'CREATE TABLE IF NOT EXISTS gifs(uuid CHAR(36) NOT NULL PRIMARY KEY, name VARCHAR(50), path VARCHAR(100), featured BOOL, creationDate DATE, processing BOOL )');
+        await this.query(connection, 'CREATE TABLE IF NOT EXISTS gifs(uuid CHAR(36) NOT NULL PRIMARY KEY, name VARCHAR(50), path VARCHAR(100), featured TINYINT, creationDate DATE, processing TINYINT )');
         connection.release();
     }
 
-    public async RegisterGif(id: string, name:string, path: string, featured: boolean, creationDate: Date, processing : boolean ) : Promise<void>
+    public async RegisterGif(uuid: string, name:string, path: string, featured: boolean, creationDate: Date, processing : boolean ) : Promise<void>
     {
         const connection = await this.getConnection();
-        await this.query(connection, 'INSERT INTO gifs VALUES (?, ?, ?, ?, ?, ?)', [ id, name, path, featured, creationDate, processing ]);
+        await this.query(connection, 'INSERT INTO gifs VALUES (?, ?, ?, ?, ?, ?)', [ uuid, name, path, featured, creationDate, processing ]);
         connection.release();
     }
 
-    public async GetGif(id: string) : Promise<IGif | undefined>
+    public async GetGif(uuid: string) : Promise<IGif | undefined>
     {
         const connection = await this.getConnection();
-        const rows = await this.query(connection, 'SELECT * FROM gifs WHERE uuid=?', [ id ]);
+        const rows = await this.query(connection, 'SELECT * FROM gifs WHERE uuid=?', [ uuid ]);
 
         // If no results are returned, return an undefined object
         if(rows.length <= 0) return undefined;

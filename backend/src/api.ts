@@ -10,8 +10,8 @@ const router = express.Router();
 const bucket = new Bucket(Config.buckets.gifs.name, Config.buckets.gifs.region);
 const db = new Database();
 
-router.get("/pictures/:id", async (req, res) => {
-    db.GetGif(req.params["id"]).then(async (gif) => {
+router.get("/pictures/:uuid", async (req, res) => {
+    db.GetGif(req.params["uuid"]).then(async (gif) => {
 
         // Does the gif exist in the database
         if(!gif)
@@ -65,14 +65,14 @@ router.post("/pictures", async (req, res) => {
     }
 
     // Create a unique GIF id
-    const id = uuid();
+    const Uuid = uuid();
 
     // Save uploaded files to s3
     const files = getFiles(req.files.files as UploadedFile[]);
 
     // Create json data
     const jsonObj = {
-        key: id,
+        key: Uuid,
         files: files.map(x => x.fileName),
         delay: req.body.delay,
         quality: req.body.quality
@@ -80,17 +80,17 @@ router.post("/pictures", async (req, res) => {
 
     // Add json file
     files.push({
-        fileName: id + ".json",
+        fileName: Uuid + ".json",
         data: Buffer.from(JSON.stringify(jsonObj), 'utf-8')
     });
 
     // Uplaod all files
-    bucket.uploadFiles(id, files).then(() => {
+    bucket.uploadFiles(Uuid, files).then(() => {
         res.contentType("application/json")
             .send({
                 "status": 200,
                 "message": "Started processing files.",
-                "id": id
+                "uuid": Uuid
             });
     })
     .catch((err) => {
