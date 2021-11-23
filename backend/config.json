@@ -12,9 +12,9 @@
         }
     },
     "db": {
-        "host": "",
-        "user": "admin",
-        "password": "",
+        "host": "localhost",
+        "user": "jifferadmin",
+        "password": "VBMpoasCMfqdub7cL2SYpMHFaGcDDf",
         "port": 3306,
         "database": "JifferDB"
     },

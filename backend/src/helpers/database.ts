@@ -46,7 +46,7 @@ export class Database
     public async RegisterGif(uuid: string, name:string, path: string, featured: boolean, creationDate: Date, processing : boolean ) : Promise<void>
     {
         const connection = await this.getConnection();
-        await this.query(connection, 'INSERT INTO gifs VALUES (?, ?, ?, ?, ?, ?)', [ uuid, name, path, featured, creationDate, processing ]);
+        await this.query(connection, 'INSERT INTO gifs VALUES (?, ?, ?, ?, ?, ?)', [ uuid, name, path, featured ? 1 : 0 , creationDate, processing ? 1 : 0 ]);
         connection.release();
     }
 

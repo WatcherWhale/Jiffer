@@ -13,9 +13,10 @@ const db = new Database();
 router.get("/pictures/", async (req, res) => {
     // Get all gifs
     db.GetGifs().then(async (gifs) => {
-        res.contentType("image/json").send(JSON.stringify(gifs));
+        res.contentType("application/json").send(JSON.stringify(gifs));
     })
-    .catch(() => {
+    .catch((err) => {
+        console.log(err);
         res.status(500).send({status: 500});
     })
 });
@@ -50,7 +51,8 @@ router.get("/pictures/:uuid", async (req, res) => {
         // Send the file
         res.contentType("image/gif").send(file);
     })
-    .catch(() => {
+    .catch((err) => {
+        console.log(err)
         res.status(500).send({status: 500});
     })
 });
@@ -63,6 +65,8 @@ router.post("/pictures", async (req, res) => {
         res.contentType("application/json")
             .status(401)
             .send({"status": 401});
+
+        return;
     }
 
     // Check if there are files attached
@@ -97,7 +101,7 @@ router.post("/pictures", async (req, res) => {
     // Upload all files
     bucket.uploadFiles(uuid, files).then(() => {
 
-        db.RegisterGif(uuid, req.body.name, uuid + "/" + uuid + ".gif", req.body.featured, new Date(), true).then(() => {
+        db.RegisterGif(uuid, req.body.name, uuid + "/" + uuid + ".gif", req.body.featured == "true", new Date(), true).then(() => {
             res.contentType("application/json")
                 .send({
                     "status": 200,
@@ -106,6 +110,7 @@ router.post("/pictures", async (req, res) => {
                 });
         })
         .catch((err) => {
+            console.log(err)
             res.status(500).contentType("application/json")
                 .send({
                     "status": 500,
@@ -116,6 +121,7 @@ router.post("/pictures", async (req, res) => {
 
     })
     .catch((err) => {
+        console.log(err);
         res.status(500).contentType("application/json")
             .send({
                 "status": 500,
