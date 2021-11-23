@@ -41,5 +41,5 @@ jobs:
 
       - name: Build lambda
         run: |
-          cd lambda
-          docker build -t lambda .
+          cd lambda-gif
+          docker build -t jiffer .
