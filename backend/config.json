@@ -13,8 +13,10 @@
     },
     "db": {
         "host": "",
-        "user": "",
-        "password": ""
+        "user": "admin",
+        "password": "",
+        "port": 3306,
+        "database": "JifferDB"
     },
     "cognito": {
         "poolId": "",
