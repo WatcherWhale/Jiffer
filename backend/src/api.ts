@@ -28,7 +28,7 @@ router.get("/pictures/:uuid", async (req, res) => {
         }
 
         // Get the gif from the S3 bucket
-        const file = await bucket.getFile(gif.file);
+        const file = await bucket.getFile(gif.path);
 
         // Check if the file exists in the bucket
         if(!file)

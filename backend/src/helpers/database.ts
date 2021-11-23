@@ -8,12 +8,7 @@ export class Database
 
     constructor()
     {
-        this.pool = mysql.createPool({
-            host: Config.db.host,
-            user: Config.db.user,
-            password: Config.db.password,
-            port: Config.db.port
-        })
+        this.pool = mysql.createPool((Config.db))
     }
 
     private getConnection() : Promise<mysql.PoolConnection>
@@ -46,15 +41,6 @@ export class Database
                 resolve(results);
             });
         });
-    }
-
-    public async MakeDatabase()     //use this, or the database.sql
-    {
-        const connection = await this.getConnection();
-        await this.query(connection, 'CREATE DATABASE IF NOT EXISTS JifferDB;');
-        await this.query(connection, 'USE JifferDB;');
-        await this.query(connection, 'CREATE TABLE IF NOT EXISTS gifs(uuid CHAR(36) NOT NULL PRIMARY KEY, name VARCHAR(50), path VARCHAR(100), featured TINYINT, creationDate DATE, processing TINYINT )');
-        connection.release();
     }
 
     public async RegisterGif(uuid: string, name:string, path: string, featured: boolean, creationDate: Date, processing : boolean ) : Promise<void>
