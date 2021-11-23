@@ -3,12 +3,22 @@ import { UploadedFile } from 'express-fileupload';
 import { Bucket } from './helpers/bucket';
 import { Database } from './helpers/database';
 import { getFiles } from './helpers/files';
-import { v4 as uuid } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Config } from './helpers/config';
 
 const router = express.Router();
 const bucket = new Bucket(Config.buckets.gifs.name, Config.buckets.gifs.region);
 const db = new Database();
+
+router.get("/pictures/", async (req, res) => {
+    // Get all gifs
+    db.GetGifs().then(async (gifs) => {
+        res.contentType("image/json").send(JSON.stringify(gifs));
+    })
+    .catch(() => {
+        res.status(500).send({status: 500});
+    })
+});
 
 router.get("/pictures/:uuid", async (req, res) => {
     db.GetGif(req.params["uuid"]).then(async (gif) => {
@@ -65,14 +75,14 @@ router.post("/pictures", async (req, res) => {
     }
 
     // Create a unique GIF id
-    const Uuid = uuid();
+    const uuid = uuidv4();
 
     // Save uploaded files to s3
     const files = getFiles(req.files.files as UploadedFile[]);
 
     // Create json data
     const jsonObj = {
-        key: Uuid,
+        key: uuid,
         files: files.map(x => x.fileName),
         delay: req.body.delay,
         quality: req.body.quality
@@ -80,24 +90,37 @@ router.post("/pictures", async (req, res) => {
 
     // Add json file
     files.push({
-        fileName: Uuid + ".json",
+        fileName: uuid + ".json",
         data: Buffer.from(JSON.stringify(jsonObj), 'utf-8')
     });
 
-    // Uplaod all files
-    bucket.uploadFiles(Uuid, files).then(() => {
-        res.contentType("application/json")
-            .send({
-                "status": 200,
-                "message": "Started processing files.",
-                "uuid": Uuid
+    // Upload all files
+    bucket.uploadFiles(uuid, files).then(() => {
+
+        db.RegisterGif(uuid, req.body.name, uuid + "/" + uuid + ".gif", req.body.featured, new Date(), true).then(() => {
+            res.contentType("application/json")
+                .send({
+                    "status": 200,
+                    "message": "Started processing files.",
+                    "uuid": uuid
+                });
+        })
+        .catch((err) => {
+            res.status(500).contentType("application/json")
+                .send({
+                    "status": 500,
+                    "message": "Failed to register file.",
+                    "uuid": uuid
             });
+        });
+
     })
     .catch((err) => {
         res.status(500).contentType("application/json")
             .send({
                 "status": 500,
-                "message": "Failed to process files."
+                "message": "Failed to process files.",
+                "uuid": uuid
         });
     });
 });

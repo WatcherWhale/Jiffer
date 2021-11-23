@@ -58,6 +58,18 @@ export class Database
         // If no results are returned, return an undefined object
         if(rows.length <= 0) return undefined;
 
+        connection.release();
+
         return rows[0];
+    }
+
+    public async GetGifs() : Promise<IGif[]>
+    {
+        const connection = await this.getConnection();
+        const rows = await this.query(connection, 'SELECT * FROM gifs WHERE processing=?', [ 0 ]);
+
+        connection.release();
+
+        return rows;
     }
 }
