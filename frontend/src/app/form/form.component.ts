@@ -16,12 +16,23 @@ export class FormComponent implements OnInit {
   imageUrl: string = "";
   id: string = "";
   submitted: boolean = false;
+  files :string[] = []
 
   ngOnInit(): void {
 
     setInterval(()=>{
       bulmaSlider.attach()
     },100)
+  }
+
+  filesChanged(files: FileList | null)
+  {
+    if(files == null) return;
+
+    this.files = [];
+
+    for(let i = 0; i < files.length; i++)
+      this.files.push(files[i].name);
   }
 
   submit() {
