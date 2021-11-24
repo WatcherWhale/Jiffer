@@ -12,8 +12,8 @@
         }
     },
     "db": {
-        "host": "localhost",
-        "user": "jifferadmin",
+        "host": "jiffer.cziznklnykbd.us-east-1.rds.amazonaws.com",
+        "user": "admin",
         "password": "VBMpoasCMfqdub7cL2SYpMHFaGcDDf",
         "port": 3306,
         "database": "JifferDB"

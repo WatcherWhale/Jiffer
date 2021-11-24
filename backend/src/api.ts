@@ -38,6 +38,12 @@ router.get("/pictures/:uuid", async (req, res) => {
             return;
         }
 
+        if(req.query["status"] == "true")
+        {
+            res.send({status: 200, message: "Image file has finished processing."});
+            return;
+        }
+
         // Get the gif from the S3 bucket
         const file = await bucket.getFile(gif.path);
 
