@@ -11,13 +11,15 @@ export class FormComponent implements OnInit {
 
   constructor() { }
 
-  //action: string = "http://ec2-3-239-8-46.compute-1.amazonaws.com/api/pictures";
-  action: string = "http://localhost:8080/api/pictures";
+  action: string = "";
   imageUrl: string = "";
   id: string = "";
   submitted: boolean = false;
 
   ngOnInit(): void {
+
+    this.action = window.location.protocol + "//" + window.location.host + "/api/pictures";
+    console.log(this.action)
 
     setInterval(()=>{
       bulmaSlider.attach()
@@ -61,7 +63,7 @@ export class FormComponent implements OnInit {
 
     if(await this.requestUrl())
     {
-      this.imageUrl = this.action + "/" + this.id;
+      this.imageUrl = window.location.protocol + "//" + window.location.host + "/jiff/" + this.id + ".gif";
     }
     else
     {
