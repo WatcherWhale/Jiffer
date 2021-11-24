@@ -26,5 +26,7 @@ RUN npm install
 # Copy the source code into the container
 COPY index.js ${LAMBDA_TASK_ROOT}
 
+RUN chmod 666 index.js package.json package-lock.json
+
 # The run command
 CMD [ "index.handler" ]
