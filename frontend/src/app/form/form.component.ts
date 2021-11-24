@@ -11,6 +11,7 @@ export class FormComponent implements OnInit {
 
   constructor() { }
 
+  //action: string = "http://ec2-3-239-8-46.compute-1.amazonaws.com/api/pictures";
   action: string = "http://localhost:8080/api/pictures";
   imageUrl: string = "";
   id: string = "";
@@ -36,7 +37,7 @@ export class FormComponent implements OnInit {
       if(this.status === 200)
       {
         const res = JSON.parse(this.responseText);
-        self.id = res.id;
+        self.id = res.uuid;
         self.check();
       }
       else
@@ -55,10 +56,30 @@ export class FormComponent implements OnInit {
     this.copied=true;
   }
 
-  check() {
-    // TODO: Check if processing has been completed. Use setTimeout (5000ms) to check until gif is created.
-    // TODO: If created set `this.imageUrl` to the gif url.
+  async check() {
     console.log("Checking");
 
+    if(await this.requestUrl())
+    {
+      this.imageUrl = this.action + "/" + this.id;
+    }
+    else
+    {
+      setTimeout(() => this.check(), 10000);
+    }
+  }
+
+  requestUrl()
+  {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function()
+      {
+        resolve(this.status == 200);
+      };
+
+      xhr.open("get", this.action + "/" + this.id + "?status=true");
+      xhr.send();
+    });
   }
 }
