@@ -1,6 +1,7 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
 import { APIRouter } from './api';
+import { JIFFRouter } from './jiff';
 import { AuthMiddleware } from './authentication';
 import { Config } from './helpers/config';
 import {Static} from './static';
@@ -17,6 +18,7 @@ app.use(AuthMiddleware);
 
 // Register API
 app.use("/api", APIRouter);
+app.use("/jiff", JIFFRouter);
 
 // Register static assets
 app.use(Static);
