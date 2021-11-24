@@ -16,7 +16,15 @@ if(Config.useStaticBucket)
         // Get the file path to query the s3 buket
         let reqPath = req.path;
         if(req.path == "/") reqPath = "/index.html";
-        reqPath = reqPath.slice(1);
+
+        // If the asset is not a html file, redirect to cloudfront
+        if(reqPath.indexOf("html") == -1)
+        {
+            res.redirect(Config.cloudfront + reqPath)
+            return;
+        }
+
+        reqPath = reqPath.slice(1)
 
         bucket.getFile(reqPath).then(async (file) => {
             // File does not exist, continue with other routing methods
