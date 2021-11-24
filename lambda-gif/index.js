@@ -44,8 +44,10 @@ const createGif = async (event, context) => {
 
                 console.log("Downloaded " + file);
 
-                fs.writeFileSync("/tmp/" + i + ".png", object.Body)
-                gif = gif.in("/tmp/" + i + ".png");
+                const ext = path.extname(file);
+
+                fs.writeFileSync("/tmp/" + i + ext, object.Body)
+                gif = gif.in("/tmp/" + i + ext);
             }
 
             console.log("Downloaded files");
