@@ -1,6 +1,7 @@
 {
     "port": 8080,
     "useStaticBucket": true,
+    "cloudfront": "https://dyx1ubz67t1xn.cloudfront.net",
     "buckets": {
         "gifs": {
             "region": "us-east-1",
