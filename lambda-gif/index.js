@@ -85,7 +85,8 @@ const createGif = (event, context) => {
                 // Remove files from temporary filesystem
                 for(const i in json.files)
                 {
-                    fs.rmSync("/tmp/" + i + ".png");
+                    const ext = path.extname(json.files[i]);
+                    fs.rmSync("/tmp/" + i + ext);
                 }
 
                 fs.rmSync("/tmp/gif.gif");
