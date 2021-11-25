@@ -37,9 +37,9 @@
 
                     <br>
 
-                    <div class="file is-danger">
+                    <div class="file is-danger has-name is-fullwidth">
                         <label class="file-label">
-                            <input class="file-input" type="file" multiple name="files" accept="image/png, image/jpeg">
+                            <input class="file-input" type="file" multiple id="files" name="files" accept="image/png, image/jpeg" #filesInput (change)="filesChanged(filesInput.files)">
                             <span class="file-cta">
                                 <span class="file-icon">
                                     <i class="fas fa-folder-open"></i>
@@ -47,6 +47,9 @@
                                 <span class="file-label">
                                 Browse
                                 </span>
+                            </span>
+                            <span class="file-name">
+                                {{files}}
                             </span>
                         </label>
                     </div>

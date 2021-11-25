@@ -8,6 +8,7 @@ import { TermsComponent } from './terms/terms.component';
 import { FeaturedComponent } from './featured/featured.component';
 import { LoginComponent } from './login/login.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
   ],
   imports: [
     BrowserModule,
-    ClipboardModule
+    ClipboardModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
