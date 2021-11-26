@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import {FormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import { JiffComponent } from './jiff/jiff.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component';
     TermsComponent,
     FeaturedComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    JiffComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,10 @@ import { HomeComponent } from './home/home.component';
       {path: "", component: HomeComponent},
       {path: "featured", component: FeaturedComponent},
       {path: "eula", component: TermsComponent},
-      {path: "login", component: LoginComponent}
+      {path: "login", component: LoginComponent},
+      {path: "jiff", children:[
+        {path: "**", component: JiffComponent}
+      ]}
     ], { useHash: true })
   ],
   providers: [],
