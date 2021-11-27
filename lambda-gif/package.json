@@ -1,13 +1,17 @@
 {
   "name": "jiffer-lambda",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "The Jiff creation lambda function.",
+  "contributors": [
+    {
+      "name": "Mathias Maes"
+    },
+    {
+      "name": "Cato van Hooijdonk"
+    }
+  ],
+  "license": "GPL-3.0-or-later",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1024.0",
     "gm": "^1.23.1",

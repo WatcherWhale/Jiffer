@@ -5,6 +5,7 @@ build:
 clean:
 	rm -rf dist
 	rm -f jiffer.tar.gz
+	rm -f jiffer-frontend.tar.gz
 	make clean -C frontend
 	make clean -C backend
 
@@ -16,7 +17,8 @@ package:
 	# Create a clean new build
 	make clean install
 	# Copy backend files
-	cp -r backend/dist dist
+	mkdir dist
+	cp -r backend/dist dist/dist
 	cp backend/package.json dist/
 	cp backend/package-lock.json dist/
 	cp backend/ecosystem.config.js dist/

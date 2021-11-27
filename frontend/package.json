@@ -1,6 +1,15 @@
 {
-  "name": "frontend",
+  "name": "jiffer-frontend",
   "version": "0.0.0",
+  "contributors": [
+    {
+      "name": "Mathias Maes"
+    },
+    {
+      "name": "Cato van Hooijdonk"
+    }
+  ],
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
