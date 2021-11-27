@@ -90,8 +90,26 @@ npm run delete
 
 ### Production
 
+#### From `jiffer.tar.gz`
+
 ```bash
-# Install & start on production servers
+mkdir jiffer
+tar -xf jiffer.tar.gz -C jiffer
+
+cd jiffer
+
+./install.sh
+
+NODE_ENV=production npm install
+npm run production
+```
+
+
+#### From source
+
+```bash
+./install.sh
+
 npm install
 npm run build
 npm run production

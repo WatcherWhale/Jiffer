@@ -22,6 +22,7 @@ package:
 	cp backend/package.json dist/
 	cp backend/package-lock.json dist/
 	cp backend/ecosystem.config.js dist/
+	cp backend/install.sh dist/
 	# Copy frontend to the static folder
 	cp -r frontend/dist/frontend dist/static
 	# On Linux systems create a .tar.gz
