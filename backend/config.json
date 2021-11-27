@@ -1,7 +1,7 @@
 {
     "port": 8080,
     "useStaticBucket": true,
-    "cloudfront": "https://dyx1ubz67t1xn.cloudfront.net",
+    "cloudfront": "",
     "buckets": {
         "gifs": {
             "region": "us-east-1",
@@ -13,16 +13,16 @@
         }
     },
     "db": {
-        "host": "jiffer.cziznklnykbd.us-east-1.rds.amazonaws.com",
+        "host": "localhost",
         "user": "admin",
         "password": "VBMpoasCMfqdub7cL2SYpMHFaGcDDf",
         "port": 3306,
         "database": "JifferDB"
     },
     "cognito": {
-        "poolId": "",
-        "clientId": "",
-        "poolRegion": ""
+        "poolId": "us-east-1_ElTVz1YIc",
+        "clientId": "3i0k3tjjb55arjqh4ma4ea7lq8",
+        "poolRegion": "us-east-1"
 
     }
 }
