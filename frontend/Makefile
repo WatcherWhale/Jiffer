@@ -6,5 +6,4 @@ clean:
 
 install:
 	npm install
-	make build
 
