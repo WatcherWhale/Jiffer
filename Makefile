@@ -1,6 +1,7 @@
 build:
 	make build -C frontend
 	make build -C backend
+	make build -C lambda-gif
 
 clean:
 	rm -rf dist
@@ -12,6 +13,7 @@ clean:
 install:
 	make install -C frontend
 	make install -C backend
+	make build
 
 package:
 	# Create a clean new build
@@ -28,4 +30,6 @@ package:
 	# On Linux systems create a .tar.gz
 	bsdtar -a -cf jiffer.tar.gz -C dist .
 	bsdtar -a -cf jiffer-frontend.tar.gz -C dist/static .
+	# Publish docker images
+	make login publish -C lambda-gif
 
