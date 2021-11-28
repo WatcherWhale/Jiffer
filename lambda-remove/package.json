@@ -16,6 +16,7 @@
   "license": "GPL-3.0-or-later",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.1037.0",
     "mysql": "^2.18.1"
   }
 }
