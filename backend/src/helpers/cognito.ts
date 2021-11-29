@@ -1,4 +1,5 @@
-import AmazonCognitoIdentity, {CognitoUserAttribute} from 'amazon-cognito-identity-js';
+import {CognitoUserSession} from 'amazon-cognito-identity-js';
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 import request from 'request';
 import jwkToPem from 'jwk-to-pem';
 import jwt from 'jsonwebtoken';
@@ -30,7 +31,7 @@ function registerUser(email :string, password :string) {
   });
 }
 //LOGIN
-function login(email:string, password:string) {
+function login(email:string, password:string) : Promise<CognitoUserSession> {
   return new Promise((resolve, reject) => {
     const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
       Username : email,
@@ -75,7 +76,8 @@ function validateToken(token :any) :Promise<boolean> {
         //validate the token
         var decodedJwt = jwt.decode(token, {complete: true});
         if (!decodedJwt) {
-          reject("Not a valid JWT token");
+          //reject("Not a valid JWT token");
+          resolve(false);
           return;
         }
         var kid = decodedJwt.header.kid as string;
