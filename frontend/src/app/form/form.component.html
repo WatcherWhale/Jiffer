@@ -21,16 +21,11 @@
                         <output for="qualitySlider">10</output>
                     </div>
 
-                    <div class="field">
-                        Featured GIF? 
+                    <div class="field"> 
                         <div class="control">
-                            <label class="radio">
-                                <input type="radio" name="question">
-                                Yes
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="question" checked>
-                                No
+                            <label class="checkbox">
+                                <input type="checkbox" name="question">
+                                Featured GIF
                             </label>
                         </div>
                     </div>
@@ -48,7 +43,7 @@
                                 Browse
                                 </span>
                             </span>
-                            <span class="file-name">
+                            <span class="file-name" >
                                 {{files}}
                             </span>
                         </label>
@@ -60,7 +55,7 @@
                 <button class="button is-danger" [ngClass]="{'is-loading': submitted}" (click)="submit()" *ngIf="!imageUrl"> Submit </button>
             </div>
 
-            <figure class="image is-danger is-rounded" *ngIf="imageUrl">
+            <figure class="image" *ngIf="imageUrl">
                 <img [src]="imageUrl" >
             </figure>
 
