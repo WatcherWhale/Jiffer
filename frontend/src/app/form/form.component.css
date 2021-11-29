@@ -38,11 +38,17 @@ form {
     justify-content: center;
 }
 
-label{
+label.text{
     margin-left:20px;
 }
 
 .file-name{
     border-color: transparent;
     border-radius: 10px;
+}
+.sliderOutput{
+    width: 4rem !important;
+}
+#delaySlider{
+    width:89%;
 }

@@ -32,7 +32,9 @@
     "@fortawesome/fontawesome-free": "^5.15.4",
     "bulma": "^0.9.3",
     "bulma-carousel": "^4.0.24",
+    "bulma-checkradio": "^2.1.2",
     "bulma-slider": "^2.0.4",
+    "bulma-switch-control": "^1.1.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
