@@ -90,12 +90,16 @@ router.post("/pictures", async (req, res) => {
     // Save uploaded files to s3
     const files = getFiles(req.files.files as UploadedFile[]);
 
+    const delay = Math.round(parseFloat(req.body.delay) / 10);
+
+    let filters = JSON.parse(req.body.filters) || {};
+    filters['delay'] = [ delay.toString() ];
+
     // Create json data
     const jsonObj = {
         key: uuid,
+        filters: filters,
         files: files.map(x => x.fileName),
-        delay: req.body.delay,
-        quality: req.body.quality
     }
 
     // Add json file
