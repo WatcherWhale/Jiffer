@@ -18,7 +18,7 @@ jobs:
       - name: Install & Build
         run: |
           cd backend
-          npm install
+          npm ci
           npm run build
 
   Frontend:
@@ -30,7 +30,7 @@ jobs:
       - name: Install & Build
         run: |
           cd frontend
-          npm install
+          npm ci
           npm run build
 
   Lambda:
