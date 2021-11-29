@@ -12,7 +12,7 @@ const poolData = {
   ClientId: Config.cognito.clientId
 }
 const pool_region = Config.cognito.poolRegion;
-
+//REGISTERUSER
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 function registerUser(email :string, password :string) {
   return new Promise((resolve, reject) => {
@@ -29,6 +29,7 @@ function registerUser(email :string, password :string) {
     });
   });
 }
+//LOGIN
 function login(email:string, password:string) {
   return new Promise((resolve, reject) => {
     const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
@@ -50,8 +51,8 @@ function login(email:string, password:string) {
     });
   });
 }
-
-function validateToken(token :any) {
+//ValidateToken
+function validateToken(token :any) :Promise<boolean> {
   return new Promise((resolve, reject) => {
     request({
       url: `https://cognito-idp.${pool_region}.amazonaws.com/${poolData.UserPoolId}/.well-known/jwks.json`,
@@ -80,14 +81,17 @@ function validateToken(token :any) {
         var kid = decodedJwt.header.kid as string;
         var pem = pems[kid] as string;
         if (!pem) {
-          reject('Invalid token');
+          //reject('Invalid token');
+          resolve(false);
           return;
         }
         jwt.verify(token, pem, function(err:any, payload:any) {
           if (err) {
-            reject("Invalid Token.");
+            //reject('Invalid token');
+          resolve(false);
           } else {
-            resolve("Valid Token.");
+           //resolve("Valid Token.");
+           resolve(true);
           }
         });
       } else {
