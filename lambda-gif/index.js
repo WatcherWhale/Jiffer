@@ -54,23 +54,20 @@ const createGif = (event, context) => {
             console.log("Downloaded files");
 
 
-            const filters = Object.keys(json.filters);
+            console.log("Applying filters");
 
+            const filters = Object.keys(json.filters);
             for(let i in filters)
             {
                 const filter = filters[i];
 
-                console.log(filter)
-
+                // If the filter name is a valid function
+                //  execute it with the requested parameters
                 if(filter in gif)
                 {
                     gif[filter](...json.filters[filter]);
                 }
             }
-
-            // Set the GIF paramters
-            //gif = gif.delay(json.delay);
-            //gif = gif.quality(json.quality);
 
             // Write the gif to the temporary filesystem
             gif.write("/tmp/gif.gif", async (err) => {
@@ -94,7 +91,7 @@ const createGif = (event, context) => {
                     Body: fs.readFileSync("/tmp/gif.gif")
                 }).promise();
 
-                //await updateDB(json.key);
+                await updateDB(json.key);
 
 
                 // Remove files from temporary filesystem
