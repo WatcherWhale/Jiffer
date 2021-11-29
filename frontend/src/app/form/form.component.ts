@@ -16,6 +16,7 @@ export class FormComponent implements OnInit {
   id: string = "";
   submitted: boolean = false;
   files :string[] = []
+  advanced :boolean=false;
 
   ngOnInit(): void {
 
@@ -25,6 +26,14 @@ export class FormComponent implements OnInit {
     setInterval(()=>{
       bulmaSlider.attach()
     },100)
+  }
+
+  AdvancedParams()
+  {
+    if(this.advanced == false)
+      this.advanced= true;
+    else if(this.advanced == true)
+      this.advanced= false;
   }
 
   filesChanged(files: FileList | null)

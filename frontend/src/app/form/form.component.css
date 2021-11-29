@@ -52,3 +52,9 @@ label.text{
 #delaySlider{
     width:89%;
 }
+
+textarea.is-danger{
+    margin-bottom: 50px;
+    color:red;
+    background-color: rgba(255, 255, 255, 0.795);
+}

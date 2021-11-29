@@ -17,10 +17,14 @@
 
                     <div class="field">
                         <label class="switch is-rounded">
-                            <input type="checkbox" value="false">
+                            <input type="checkbox" value="false" (click)="AdvancedParams()">
                             <span class="check is-danger"></span>
                             <span class="control-label">Advanced parameters</span>
                         </label>
+                    </div>
+
+                    <div *ngIf=advanced>
+                        <textarea class="textarea is-danger" placeholder="Your parameters here..."></textarea>
                     </div>
 
                     <div class="field">
