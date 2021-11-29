@@ -60,7 +60,7 @@
                 <button class="button is-danger" [ngClass]="{'is-loading': submitted}" (click)="submit()" *ngIf="!imageUrl"> Submit </button>
             </div>
 
-            <figure class="image" *ngIf="imageUrl">
+            <figure class="image is-danger is-rounded" *ngIf="imageUrl">
                 <img [src]="imageUrl" >
             </figure>
 
