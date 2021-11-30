@@ -1,4 +1,5 @@
-import AmazonCognitoIdentity, {CognitoUserAttribute} from 'amazon-cognito-identity-js';
+import {CognitoUserSession} from 'amazon-cognito-identity-js';
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 import request from 'request';
 import jwkToPem from 'jwk-to-pem';
 import jwt from 'jsonwebtoken';
@@ -12,7 +13,7 @@ const poolData = {
   ClientId: Config.cognito.clientId
 }
 const pool_region = Config.cognito.poolRegion;
-
+//REGISTERUSER
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 function registerUser(email :string, password :string) {
   return new Promise((resolve, reject) => {
@@ -29,7 +30,8 @@ function registerUser(email :string, password :string) {
     });
   });
 }
-function login(email:string, password:string) {
+//LOGIN
+function login(email:string, password:string) : Promise<CognitoUserSession> {
   return new Promise((resolve, reject) => {
     const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
       Username : email,
@@ -50,8 +52,8 @@ function login(email:string, password:string) {
     });
   });
 }
-
-function validateToken(token :any) {
+//ValidateToken
+function validateToken(token :any) :Promise<boolean> {
   return new Promise((resolve, reject) => {
     request({
       url: `https://cognito-idp.${pool_region}.amazonaws.com/${poolData.UserPoolId}/.well-known/jwks.json`,
@@ -74,20 +76,24 @@ function validateToken(token :any) {
         //validate the token
         var decodedJwt = jwt.decode(token, {complete: true});
         if (!decodedJwt) {
-          reject("Not a valid JWT token");
+          //reject("Not a valid JWT token");
+          resolve(false);
           return;
         }
         var kid = decodedJwt.header.kid as string;
         var pem = pems[kid] as string;
         if (!pem) {
-          reject('Invalid token');
+          //reject('Invalid token');
+          resolve(false);
           return;
         }
         jwt.verify(token, pem, function(err:any, payload:any) {
           if (err) {
-            reject("Invalid Token.");
+            //reject('Invalid token');
+          resolve(false);
           } else {
-            resolve("Valid Token.");
+           //resolve("Valid Token.");
+           resolve(true);
           }
         });
       } else {

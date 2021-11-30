@@ -20,8 +20,8 @@
         "database": "JifferDB"
     },
     "cognito": {
-        "poolId": "us-east-1_ElTVz1YIc",
-        "clientId": "3i0k3tjjb55arjqh4ma4ea7lq8",
+        "poolId": "us-east-1_ENV2dBN6l",
+        "clientId": "378fh2u54dg5cjr50i1igsppig",
         "poolRegion": "us-east-1"
 
     }
