@@ -3,9 +3,9 @@
         <div class="content">
             <form enctype="multipart/form-data" *ngIf="!imageUrl">
                 <fieldset [disabled]="submitted">
-                    <p>Image-To-GIF converter </p>
+                    <p>Image-To-JIFF converter </p>
                     <div class="field">
-                        <label class="label text">Name of your GIF:</label>
+                        <label class="label text">Name of your JIFF:</label>
                         <input id="name"class="input is-danger is-rounded" type="text" name="name">
                     </div>
 
@@ -29,7 +29,7 @@
 
                     <div class="field">
                         <input class="is-checkradio has-background-color is-danger" id="featuredCheckBox" type="checkbox" name="featured">
-                        <label for="featuredCheckBox">Featured GIF</label>
+                        <label for="featuredCheckBox">Featured JIFF</label>
                     </div>
 
                     <br>
@@ -68,6 +68,9 @@
                 <div class="control">
                     <a cdkCopyToClipboard="{{imageUrl}}"class="button is-danger is-rounded" (click)="Copied()">Copy</a>
                     <label *ngIf="copied">Copied!</label>
+                </div>
+                <div class="field" *ngIf="imageUrl">
+                    <a href=# download="{{imageUrl}}" class="button is-danger is-rounded">Download</a>
                 </div>
             </div>
 

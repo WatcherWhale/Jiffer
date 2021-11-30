@@ -9,10 +9,10 @@ declare var bulmaSlider: any;
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
   action: string = "";
-  imageUrl: string = "";
+  imageUrl: string = "https://www.pictorem.com/collection/900_Sassan-Filsoof_scuba%20whale.jpg";
   id: string = "";
   submitted: boolean = false;
   files :string[] = []
