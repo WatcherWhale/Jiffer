@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 
 @Component({
@@ -9,14 +8,13 @@ import {ApiService} from '../api.service';
 })
 export class JiffComponent implements OnInit {
 
-  uuid: string = "";
-  name: string = "";
+  @Input("uuid") uuid: string = "";
+  @Input("name") name: string = "";
+  copied : boolean = false;
 
-  constructor(public api : ApiService, private router : Router) { }
+  constructor(public api : ApiService) { }
 
   ngOnInit(): void {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.uuid = window.location.hash.substring("#/jiff/".length);
   }
 
 }

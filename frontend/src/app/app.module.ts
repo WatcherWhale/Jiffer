@@ -32,9 +32,6 @@ import { JiffListComponent } from './jiff-list/jiff-list.component';
       {path: "", component: HomeComponent},
       {path: "eula", component: TermsComponent},
       {path: "login", component: LoginComponent},
-      {path: "jiff", children:[
-        {path: "**", component: JiffComponent}
-      ]}
     ], { useHash: true })
   ],
   providers: [],

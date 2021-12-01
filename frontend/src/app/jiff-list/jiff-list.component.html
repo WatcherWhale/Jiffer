@@ -3,12 +3,7 @@
 
     <div class="columns is-desktop is-multiline">
         <div class="column is-{{gif.size}}-widescreen is-{{gif.size + 1}}-desktop is-full-tablet" *ngFor="let gif of gifs">
-            <article class="notification is-danger">
-            <figure class="image">
-                <img src="{{api.getHost()}}/jiff/{{gif.uuid}}.gif">
-            </figure>
-                <p class="title">{{gif.name}}</p>
-            </article>
+            <app-jiff [uuid]="gif.uuid" [name]="gif.name"></app-jiff>
         </div>
     </div>
 </section>

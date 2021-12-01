@@ -4,3 +4,10 @@
 .card {
     background-color:rgba(241, 113, 113, 0.322);
 }
+
+.notification {
+    background-color:rgba(241, 113, 113, 0.322);
+    padding: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+}
