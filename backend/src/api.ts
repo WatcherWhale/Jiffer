@@ -92,7 +92,7 @@ router.post("/pictures", async (req, res) => {
 
     const delay = Math.round(parseFloat(req.body.delay) / 10);
 
-    let filters = JSON.parse(req.body.filters) || {};
+    let filters = JSON.parse(req.body.filters || '{}');
     filters['delay'] = [ delay.toString() ];
 
     // Create json data
