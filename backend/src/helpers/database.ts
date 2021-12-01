@@ -63,10 +63,20 @@ export class Database
         return rows[0];
     }
 
-    public async GetGifs() : Promise<IGif[]>
+    public async GetGifs(featured: boolean | null = null) : Promise<IGif[]>
     {
         const connection = await this.getConnection();
-        const rows = await this.query(connection, 'SELECT * FROM gifs WHERE processing=?', [ 0 ]);
+
+        let rows;
+        if(featured != null)
+        {
+            rows = await this.query(connection, 'SELECT * FROM gifs WHERE processing=? AND featured=?', [ 0, featured ? 1 : 0 ]);
+        }
+        else
+        {
+            rows = await this.query(connection, 'SELECT * FROM gifs WHERE processing=?', [ 0 ]);
+        }
+
 
         connection.release();
 
