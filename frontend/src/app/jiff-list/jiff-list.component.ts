@@ -18,7 +18,7 @@ export class JiffListComponent implements OnInit {
     this.url = this.api.getApi() + "/pictures";
 
     this.gifs = await this.api.doRequest(this.url) as any[];
-    console.log(this.gifs);
+    this.gifs.sort((a,b) => Math.random());
 
     for(const i in this.gifs)
     {
