@@ -1,0 +1,14 @@
+<br>
+<p class="title is-5 maintitle">All Jiffs:</p>
+
+<div class="columns is-multiline">
+    <div class="column is-{{gif.size}}" *ngFor="let gif of gifs">
+        <article class="notification is-danger">
+        <figure class="image">
+            <img src="{{api.getHost()}}/jiff/{{gif.uuid}}.gif">
+        </figure>
+
+            <p class="title">{{gif.name}}</p>
+        </article>
+    </div>
+</div>

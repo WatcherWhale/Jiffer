@@ -12,6 +12,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import {FormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { JiffComponent } from './jiff/jiff.component';
+import { JiffListComponent } from './jiff-list/jiff-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { JiffComponent } from './jiff/jiff.component';
     FeaturedComponent,
     LoginComponent,
     HomeComponent,
-    JiffComponent
+    JiffComponent,
+    JiffListComponent
   ],
   imports: [
     BrowserModule,

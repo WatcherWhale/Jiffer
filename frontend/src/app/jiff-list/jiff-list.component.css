@@ -1,0 +1,17 @@
+p.maintitle{
+    color:white;
+    margin-top:20px;
+    margin-left:30px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.notification {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.columns {
+    justify-content: center;
+}
