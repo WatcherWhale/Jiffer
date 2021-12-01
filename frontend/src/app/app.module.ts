@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TermsComponent } from './terms/terms.component';
-import { FeaturedComponent } from './featured/featured.component';
 import { LoginComponent } from './login/login.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import {FormsModule} from '@angular/forms';
@@ -20,7 +19,6 @@ import { JiffListComponent } from './jiff-list/jiff-list.component';
     FormComponent,
     CarouselComponent,
     TermsComponent,
-    FeaturedComponent,
     LoginComponent,
     HomeComponent,
     JiffComponent,
@@ -32,7 +30,6 @@ import { JiffListComponent } from './jiff-list/jiff-list.component';
     FormsModule,
     RouterModule.forRoot([
       {path: "", component: HomeComponent},
-      {path: "featured", component: FeaturedComponent},
       {path: "eula", component: TermsComponent},
       {path: "login", component: LoginComponent},
       {path: "jiff", children:[
