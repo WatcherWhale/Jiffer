@@ -12,7 +12,7 @@ export class FormComponent implements OnInit {
   constructor() {}
 
   action: string = "";
-  imageUrl: string = "https://www.pictorem.com/collection/900_Sassan-Filsoof_scuba%20whale.jpg";
+  imageUrl: string = "";
   id: string = "";
   submitted: boolean = false;
   files :string[] = []

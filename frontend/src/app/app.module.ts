@@ -36,7 +36,7 @@ import { JiffComponent } from './jiff/jiff.component';
       {path: "jiff", children:[
         {path: "**", component: JiffComponent}
       ]}
-    ], { useHash: true })
+    ], { useHash: true, onSameUrlNavigation:'reload' })
   ],
   providers: [],
   bootstrap: [AppComponent]

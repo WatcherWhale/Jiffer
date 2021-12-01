@@ -67,11 +67,11 @@
                 </div>
                 <div class="control">
                     <a cdkCopyToClipboard="{{imageUrl}}"class="button is-danger is-rounded" (click)="Copied()">Copy</a>
-                    <label *ngIf="copied">Copied!</label>
+                    <label *ngIf="copied" style="margin-left:10px;">Copied!</label>
                 </div>
-                <div class="field" *ngIf="imageUrl">
-                    <a href=# download="{{imageUrl}}" class="button is-danger is-rounded">Download</a>
-                </div>
+            </div>
+            <div class="field" *ngIf="imageUrl" style="margin-left:40%">
+                <a href=# download="{{imageUrl}}" class="button is-danger is-rounded" id="download">Download</a>
             </div>
 
         </div>
