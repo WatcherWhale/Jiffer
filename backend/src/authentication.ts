@@ -1,3 +1,4 @@
+import process from 'process';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import {login, registerUser, validateToken} from './helpers/cognito';
@@ -16,6 +17,13 @@ router.use(async (req, res, next) => {
         // Check if cookie exists
         if('JifferTokenCookie' in req.cookies)
         {
+            if(process.env['NODE_ENV'] === "development")
+            {
+                req.authenticated = req.cookies.JifferTokenCookie == "developer";
+                next();
+                return;
+            }
+
             // Check if a valid cookie is given
             req.authenticated = await validateToken(req.cookies.JifferTokenCookie);
         }
