@@ -1,8 +1,8 @@
 <br>
 <p class="title is-5 maintitle">All Jiffs:</p>
 
-<div class="columns is-multiline">
-    <div class="column is-{{gif.size}}" *ngFor="let gif of gifs">
+<div class="columns is-desktop is-multiline">
+    <div class="column is-{{gif.size}}-widescreen is-{{gif.size + 1}}-desktop is-full-tablet" *ngFor="let gif of gifs">
         <article class="notification is-danger">
         <figure class="image">
             <img src="{{api.getHost()}}/jiff/{{gif.uuid}}.gif">

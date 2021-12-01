@@ -27,8 +27,8 @@ export class JiffListComponent implements OnInit {
 
   }
 
-  random() {
-    return Math.round(Math.random() * 2) + 2
+  random(min: number = 2, max: number = 4) {
+    return Math.round(Math.random() * (max - min)) + min;
   }
 
 }
