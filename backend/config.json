@@ -1,6 +1,6 @@
 {
     "port": 8080,
-    "useStaticBucket": false,
+    "useStaticBucket": true,
     "cloudfront": "",
     "buckets": {
         "gifs": {
