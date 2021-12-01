@@ -2,7 +2,7 @@
     <!--p class="title is-5 maintitle">All Jiffs:</p-->
 
     <div class="columns is-desktop is-multiline">
-        <div class="column is-{{gif.size}}-widescreen is-{{gif.size + 1}}-desktop is-full-tablet" *ngFor="let gif of gifs">
+        <div class="column is-3-widescreen is-4-desktop is-full-tablet" *ngFor="let gif of gifs">
             <app-jiff [uuid]="gif.uuid" [name]="gif.name"></app-jiff>
         </div>
     </div>
