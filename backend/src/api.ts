@@ -11,8 +11,13 @@ const bucket = new Bucket(Config.buckets.gifs.name, Config.buckets.gifs.region);
 const db = new Database();
 
 router.get("/pictures/", async (req, res) => {
+
+    // Only featured or unfeatured GIFs or both?
+    let featured : boolean | null = null;
+    if(req.query.featured != undefined) featured = req.query.featured === "true" || req.query.featured === "1";
+
     // Get all gifs
-    db.GetGifs().then(async (gifs) => {
+    db.GetGifs(featured).then(async (gifs) => {
         res.contentType("application/json").send(JSON.stringify(gifs));
     })
     .catch((err) => {

@@ -1,8 +1,21 @@
-<p class="title is-5">Photos:</p>     <!-- *ngIf="recieved" bij implementatie-->
-<div class="container">
-  <div class="carousel">
-    <div class="item-{{i + 1}}" *ngFor="let image of images; let i = index">
-      <img src="{{image}}" alt="">
+<section class="section" *ngIf="images.length > 1">
+  <!--p class="title is-5">Featured Jiffs:</p-->
+  <div class="container">
+    <div class="carousel">
+      <div class="item-{{i + 1}} is-justify-content-center is-flex" *ngFor="let image of images; let i = index">
+
+        <app-jiff [uuid]="image.uuid" [name]="image.name"></app-jiff>
+
+        <!--a href="#/jiff/{{image.uuid}}">
+          <img src="{{api.getHost()}}/jiff/{{image.uuid}}.gif" alt="{{image.name}}">
+        </a-->
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<section class="section" *ngIf="images.length == 1">
+  <div class="item-{{i + 1}} is-justify-content-center is-flex" *ngFor="let image of images; let i = index">
+    <app-jiff [uuid]="image.uuid" [name]="image.name"></app-jiff>
+  </div>
+</section>

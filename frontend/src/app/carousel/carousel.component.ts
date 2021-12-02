@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from '../api.service';
 
 declare var bulmaCarousel: any;
 
@@ -9,25 +10,25 @@ declare var bulmaCarousel: any;
 })
 export class CarouselComponent implements OnInit {
   recieved = false;
-  images = [
-    "https://img.freepik.com/free-vector/flame-abstract-logo_95982-235.jpg?size=338&ext=jpg",
-    "https://img.freepik.com/free-vector/mic-leaf-logo_83874-139.jpg?size=338&ext=jpg",
-    "https://img.freepik.com/free-vector/latter-e-fire-color_116762-8.jpg?size=338&ext=jpg",
-    "https://img.freepik.com/free-vector/fire-shield-logo_23758-270.jpg?size=338&ext=jpg",
-    "https://img.freepik.com/free-vector/fire-water-logo-design_149374-138.jpg?size=338&ext=jpg",
-    "https://img.freepik.com/free-vector/flame-abstract-logo_95982-235.jpg?size=338&ext=jpg"
-  ]
-  constructor() { }
+  images: any[] = []
+  constructor(public api : ApiService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.images = await this.api.doRequest(this.api.getApi() + "/pictures/?featured=1") as any[];
 
-      setInterval(()=>{
-        bulmaCarousel.attach('.carousel', {
-        slidesToScroll: 1,
-        slidesToShow:3,
-        infinite: true,
-        autoplay: true
-      });
-      },100)
+    let toShow = this.images.length - 1;
+    if(toShow > 3) toShow = 3;
+    if(toShow <= 0) toShow = 0;
+
+
+    setInterval(()=>{
+      bulmaCarousel.attach('.carousel', {
+      slidesToScroll: 1,
+      infinite: true,
+      slidesToShow: toShow,
+      autoplay: true,
+      pagination: false
+    });
+    },100)
   }
 }
