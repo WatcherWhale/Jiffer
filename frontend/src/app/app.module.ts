@@ -31,8 +31,8 @@ import { JiffListComponent } from './jiff-list/jiff-list.component';
     RouterModule.forRoot([
       {path: "", component: HomeComponent},
       {path: "eula", component: TermsComponent},
-      {path: "login", component: LoginComponent},
-    ], { useHash: true })
+      {path: "login", component: LoginComponent}
+    ], { useHash: true, onSameUrlNavigation:'reload' })
   ],
   providers: [],
   bootstrap: [AppComponent]

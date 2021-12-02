@@ -15,11 +15,12 @@ a {
 
 .checkbox {
     margin-left:30px;
+    color:white
 }
 
 input.input {
     width: 450px;
-    background-color:rgba(255, 255, 255, 0.63);
+    background-color:rgba(255, 255, 255, 0.795);
     color:red;
 }
 
@@ -37,6 +38,23 @@ form {
     justify-content: center;
 }
 
-label{
+label.text{
     margin-left:20px;
+}
+
+.file-name{
+    border-color: transparent;
+    border-radius: 10px;
+}
+.sliderOutput{
+    width: 4rem !important;
+}
+#delaySlider{
+    width:89%;
+}
+
+textarea.is-danger{
+    margin-bottom: 50px;
+    color:red;
+    background-color: rgba(255, 255, 255, 0.795);
 }

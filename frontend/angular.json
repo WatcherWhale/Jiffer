@@ -30,7 +30,9 @@
               "src/styles.css",
               "node_modules/bulma/css/bulma.css",
               "node_modules/bulma-carousel/dist/css/bulma-carousel.min.css",
-              "node_modules/bulma-slider/dist/css/bulma-slider.min.css"
+              "node_modules/bulma-slider/dist/css/bulma-slider.min.css",
+              "node_modules/bulma-switch-control/css/main.min.css",
+              "node_modules/bulma-checkradio/dist/css/bulma-checkradio.min.css"
             ],
             "scripts": [
               "node_modules/@fortawesome/fontawesome-free/js/all.js",

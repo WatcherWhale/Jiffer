@@ -3,36 +3,33 @@
         <div class="content">
             <form enctype="multipart/form-data" *ngIf="!imageUrl">
                 <fieldset [disabled]="submitted">
-                    <p>Image-To-GIF converter </p>
+                    <p>Image-To-JIFF converter </p>
                     <div class="field">
-                        <label class="label">Name of your GIF:</label>
+                        <label class="label text">Name of your JIFF:</label>
                         <input id="name"class="input is-danger is-rounded" type="text" name="name">
                     </div>
 
                     <div class="field">
-                        <label class="label">Frame Delay: </label>
-                        <input id="delaySlider" class="slider has-output is-fullwidth is-danger" min="0" max="300" value="100" step="1" type="range" name="delay">
-                        <output for="delaySlider">100</output>
+                        <label class="label text">Frame Delay (ms): </label>
+                        <input id="delaySlider" class="slider has-output is-danger" min="0" max="5000" value="1000" step="10" type="range" name="delay">
+                        <output for="delaySlider" class="sliderOutput">1000</output>
                     </div>
 
                     <div class="field">
-                        <label class="label">Quality: </label>
-                        <input id="qualitySlider" class="slider has-output is-fullwidth is-danger" min="0" max="10" value="10" step="1" type="range" name="quality">
-                        <output for="qualitySlider">10</output>
+                        <label class="switch is-rounded">
+                            <input type="checkbox" value="false" (click)="AdvancedParams()">
+                            <span class="check is-danger"></span>
+                            <span class="control-label">Advanced parameters</span>
+                        </label>
+                    </div>
+
+                    <div *ngIf=advanced>
+                        <textarea class="textarea is-danger" placeholder="Your parameters here..."></textarea>
                     </div>
 
                     <div class="field">
-                        Featured GIF? 
-                        <div class="control">
-                            <label class="radio">
-                                <input type="radio" name="question">
-                                Yes
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="question" checked>
-                                No
-                            </label>
-                        </div>
+                        <input class="is-checkradio has-background-color is-danger" id="featuredCheckBox" type="checkbox" name="featured">
+                        <label for="featuredCheckBox">Featured JIFF</label>
                     </div>
 
                     <br>
@@ -48,7 +45,7 @@
                                 Browse
                                 </span>
                             </span>
-                            <span class="file-name">
+                            <span class="file-name" >
                                 {{files}}
                             </span>
                         </label>
@@ -70,8 +67,11 @@
                 </div>
                 <div class="control">
                     <a cdkCopyToClipboard="{{imageUrl}}"class="button is-danger is-rounded" (click)="Copied()">Copy</a>
-                    <label *ngIf="copied">Copied!</label>
+                    <label *ngIf="copied" style="margin-left:10px;">Copied!</label>
                 </div>
+            </div>
+            <div class="field" *ngIf="imageUrl" style="margin-left:40%">
+                <a href=# download="{{imageUrl}}" class="button is-danger is-rounded" id="download">Download</a>
             </div>
 
         </div>
