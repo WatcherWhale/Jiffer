@@ -4,3 +4,51 @@
 .card {
     background-color:rgba(241, 113, 113, 0.322);
 }
+
+.notification {
+    background-color:rgba(241, 113, 113, 0.322);
+    padding: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.overlay {
+    display: none;
+}
+
+.overlay .centered {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.overlay::before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.8);
+
+    z-index: -1;
+
+    position: absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+}
+
+article:hover .overlay {
+    display: block;
+
+    vertical-align: middle;
+
+    z-index: 5;
+
+    position: absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+}

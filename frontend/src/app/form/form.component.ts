@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { ApiService } from '../api.service'
 
 declare var bulmaSlider: any;
 
@@ -9,7 +10,7 @@ declare var bulmaSlider: any;
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: ApiService) { }
 
   action: string = "";
   imageUrl: string = "";
@@ -19,8 +20,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.action = window.location.protocol + "//" + window.location.host + "/api/pictures";
-    console.log(this.action)
+    this.action = this.api.getApi() + "/pictures";
 
     setInterval(()=>{
       bulmaSlider.attach()

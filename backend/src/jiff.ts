@@ -14,7 +14,6 @@ router.get("/:uuid", async (req, res) => {
     if(param.indexOf(".gif") !== -1)
     {
         param = param.substring(0, param.length - 4);
-        console.log(param)
     }
 
 

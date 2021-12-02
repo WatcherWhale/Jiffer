@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-jiff',
@@ -7,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JiffComponent implements OnInit {
 
-  uuid: string = "";
-  name: string = "";
+  @Input("uuid") uuid: string = "";
+  @Input("name") name: string = "";
+  copied : boolean = false;
 
-  constructor() { }
+  constructor(public api : ApiService) { }
 
   ngOnInit(): void {
-    this.uuid = window.location.hash.substring("#/jiff/".length);
   }
 
 }

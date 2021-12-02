@@ -1,3 +1,4 @@
+import process from 'process';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import {login, registerUser, validateToken} from './helpers/cognito';
