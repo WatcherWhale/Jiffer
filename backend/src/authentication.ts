@@ -17,9 +17,9 @@ router.use(async (req, res, next) => {
         // Check if cookie exists
         if('JifferTokenCookie' in req.cookies)
         {
-            if(process.env['NODE_ENV'] === "development")
+            if(process.env['NODE_ENV'] === "development" && req.cookies.JifferTokenCookie == "developer")
             {
-                req.authenticated = req.cookies.JifferTokenCookie == "developer";
+                req.authenticated = true;
                 next();
                 return;
             }
