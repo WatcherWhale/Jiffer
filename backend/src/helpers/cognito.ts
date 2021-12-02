@@ -13,7 +13,6 @@ const pool_region = Config.cognito.poolRegion;
 // Create user pool
 const userPool = new CognitoUserPool(poolData);
 
-// Register User
 function registerUser(email: string, password: string)
 {
     return new Promise((resolve, reject) => {
@@ -34,7 +33,6 @@ function registerUser(email: string, password: string)
     });
 }
 
-//Login
 function login(email: string, password: string) : Promise<CognitoUserSession>
 {
     return new Promise((resolve, reject) => {
@@ -58,7 +56,6 @@ function login(email: string, password: string) : Promise<CognitoUserSession>
     });
 }
 
-//ValidateToken
 function validateToken(token: any) : Promise<boolean>
 {
     return new Promise((resolve, reject) => {
