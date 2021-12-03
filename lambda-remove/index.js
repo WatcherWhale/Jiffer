@@ -4,90 +4,85 @@ const path = require('path');
 const mysql = require('mysql');
 
 const s3 = new aws.S3({ apiVersion: '2006-03-01' });
-
 let pool;
-console.log("start")
+
+console.log("Lambda starting...");
+
 const handler = async (event) => {
-    console.log("creating connection")
-    createPool();
-    
+    console.log("Started nightly cleaning check.")
+
     const bucket = process.env['bucket'];
 
-    // TODO: CODE HERE
-    console.log("query")
-    // Look at backend for more an example of how to use this
-    const results = await query("select * from gifs where creationDate < current_date() and featured = 0", []);
-    const featuredResults = await query("select * from gifs where creationDate + 30 < current_date() and featured = 1",[])
+    console.log("Querying database");
+    createPool();
+    const results = await query("select * from gifs where creationDate < current_date() and featured = 0");
+    const featuredResults = await query("select * from gifs where creationDate + 30 < current_date() and featured = 1")
 
-    // async function deleteFromS3(bucket, path) {
-    //     const listParams = {
-    //         Bucket: bucket,
-    //         Prefix: path
-    //     };
+    console.log("Deleting files from S3");
+    const promises = [];
 
-    //     const listedObjects = await s3.listObjectsV2(listParams).promise();
-    //     console.log("listedObjects", listedObjects);
-    //     if (listedObjects.Contents.length === 0) return;
-    
-    //     const deleteParams = {
-    //         Bucket: bucket,
-    //         Delete: { Objects: [] }
-    //     };
-    
-    //     listedObjects.Contents.forEach(({ Key }) => {
-    //         deleteParams.Delete.Objects.push({ Key });
-    //     });
+    // Start deleting unfeatured gifs
+    for(const i in results)
+    {
+        const result = results[i];
+        promises.push(deleteFolder(bucket, result.uuid));
+    }
 
-    //     console.log("deleteParams", deleteParams);
-    //     const deleteResult = await s3.deleteObjects(deleteParams).promise();
-    //     console.log("deleteResult", deleteResult);
-    //     if (listedObjects.IsTruncated && deleteResult)
-    //         await deleteFromS3(bucket, path);
-    // }
-    // try{
-    // for (let i in results) {
-    //     var querryResult = results[i]
-    //     const testDelete = await deleteFromS3(bucket, `${querryResult.uuid}/`);
-    // }
-    // }
-    // catch (e){
-    //     console.log(e);
-    // }   
+    // Start deleting featured gifs
+    for(const i in featuredResults)
+    {
+        const result = featuredResults[i];
+        promises.push(deleteFolder(bucket, result.uuid));
+    }
 
-    for (let i in results) {
-        const result = results[i]
+    // Wait until everything is deleted
+    for(const i in promises)
+    {
+        await promises[i];
+    }
 
-        var paramsFolder = { Bucket: bucket, Key: `${result.uuid}/`}
-        var params = {  Bucket: bucket, Key: result.uuid };
-        console.log("checking results",result.uuid)
-        await s3.deleteObject(params, function(err, data) {
-            if (err) console.log(err, err.stack);  // error
-            else     console.log();                 // deleted
-        }).promise();
-        // await s3.deleteObject(paramsFolder,function(err, data){
-        //     if (err) console.log(err,err.stack);
-        //     else console.log();
-        // }).promise();
+    console.log("All files/folders are deleted from S3");
+
+    // Delete entries from database
+    console.log("Deleting database entries.");
+
+    await query("delete from gifs where creationDate < current_date() and featured = 0")
+    await query("delete from gifs where creationDate + 30 < current_date() and featured = 1")
+
+    console.log("Nightly cleaning of gifs complete!");
+}
+
+const deleteFolder = async (bucket, folder) => {
+    const listParams = {
+        Bucket: bucket,
+        Prefix: folder + "/"
+    }
+
+    const files = await s3.listObjectsV2(listParams).promise();
+
+    let keyArr = [];
+
+    for(const i in files.Contents)
+    {
+        keyArr.push({Key: files.Contents[i].Key});
+    }
+
+    const deleteParams = {
+        Bucket: bucket,
+        Delete: {
+            Objects: keyArr
         }
     }
 
-    for (let i in results) {
-        const result = results[i].uuid
-
-        var params = {  Bucket: bucket, Key: result.uuid };
-
-        s3.deleteObject(params, function(err, data) {
-            if (err) console.log(err, err.stack);  // error
-            else     console.log();                 // deleted
-        });
+    const folderParams = {
+        Bucket: bucket,
+        Key: folder + "/"
     }
 
-    await query("delete from gifs where creationDate < current_date() and featured = 0", [])
-    await query("delete from gifs where creationDate + 30 < current_date() and featured = 1",[])
-    console.log(results)
-    console.log(featuredResults)
+    await s3.deleteObjects(deleteParams).promise();
+    await s3.deleteObject(folderParams).promise();
 
-
+};
 
 const createPool = () => {
     pool = mysql.createPool({
@@ -113,7 +108,7 @@ const getConnection = () => {
     });
 }
 
-const query = (sql, values) => {
+const query = (sql, values = []) => {
     return new Promise(async (resolve, reject) => {
         const connection = await getConnection();
         connection.query(sql, values, (err, results, fields) => {
@@ -123,7 +118,7 @@ const query = (sql, values) => {
                 reject(err);
                 return;
             }
-            console.log(results)
+
             resolve(results);
         });
     });
