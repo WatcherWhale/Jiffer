@@ -18,7 +18,7 @@ if(Config.useStaticBucket)
         if(req.path == "/") reqPath = "/index.html";
 
         // If the asset is not a html file, redirect to cloudfront
-        if(Config.cloudfront === "" && reqPath.indexOf("html") === -1)
+        if(Config.cloudfront !== "" && reqPath.indexOf("html") === -1)
         {
             res.redirect(Config.cloudfront + reqPath)
             return;
