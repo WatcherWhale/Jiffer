@@ -1,7 +1,7 @@
 {
     "port": 8080,
     "useStaticBucket": true,
-    "cloudfront": "ddka13frld15o.cloudfront.net",
+    "cloudfront": "https://ddka13frld15o.cloudfront.net",
     "buckets": {
         "gifs": {
             "region": "us-east-1",

@@ -56,6 +56,10 @@ router.post("/login", async (req, res) => {
 
 });
 
+router.all("/logout", async(req, res) => {
+    res.clearCookie("JifferTokenCookie").redirect("/");
+});
+
 router.post("/register", async (req, res) => {
 
     try
