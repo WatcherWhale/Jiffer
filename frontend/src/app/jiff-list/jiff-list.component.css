@@ -14,3 +14,23 @@ p.maintitle{
 .columns {
     justify-content: center;
 }
+
+.tile.responsive {
+    flex: none;
+    width: 100%;
+}
+
+@media (min-width: 769px) {
+    .tile.responsive {
+        flex: none;
+        width: 50%;
+    }
+}
+
+@media (min-width: 1408px) {
+    .tile.responsive {
+        flex: none;
+        width: 25%;
+    }
+}
+
