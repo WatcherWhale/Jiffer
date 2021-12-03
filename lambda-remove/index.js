@@ -19,6 +19,58 @@ const handler = async (event) => {
     const results = await query("select * from gifs where creationDate < current_date() and featured = 0", []);
     const featuredResults = await query("select * from gifs where creationDate + 30 < current_date() and featured = 1",[])
 
+    // async function deleteFromS3(bucket, path) {
+    //     const listParams = {
+    //         Bucket: bucket,
+    //         Prefix: path
+    //     };
+
+    //     const listedObjects = await s3.listObjectsV2(listParams).promise();
+    //     console.log("listedObjects", listedObjects);
+    //     if (listedObjects.Contents.length === 0) return;
+    
+    //     const deleteParams = {
+    //         Bucket: bucket,
+    //         Delete: { Objects: [] }
+    //     };
+    
+    //     listedObjects.Contents.forEach(({ Key }) => {
+    //         deleteParams.Delete.Objects.push({ Key });
+    //     });
+
+    //     console.log("deleteParams", deleteParams);
+    //     const deleteResult = await s3.deleteObjects(deleteParams).promise();
+    //     console.log("deleteResult", deleteResult);
+    //     if (listedObjects.IsTruncated && deleteResult)
+    //         await deleteFromS3(bucket, path);
+    // }
+    // try{
+    // for (let i in results) {
+    //     var querryResult = results[i]
+    //     const testDelete = await deleteFromS3(bucket, `${querryResult.uuid}/`);
+    // }
+    // }
+    // catch (e){
+    //     console.log(e);
+    // }   
+
+    for (let i in results) {
+        const result = results[i]
+
+        var paramsFolder = { Bucket: bucket, Key: `${result.uuid}/`}
+        var params = {  Bucket: bucket, Key: result.uuid };
+        console.log("checking results",result.uuid)
+        await s3.deleteObject(params, function(err, data) {
+            if (err) console.log(err, err.stack);  // error
+            else     console.log();                 // deleted
+        }).promise();
+        // await s3.deleteObject(paramsFolder,function(err, data){
+        //     if (err) console.log(err,err.stack);
+        //     else console.log();
+        // }).promise();
+        }
+    }
+
     for (let i in results) {
         const result = results[i].uuid
 
@@ -34,7 +86,8 @@ const handler = async (event) => {
     await query("delete from gifs where creationDate + 30 < current_date() and featured = 1",[])
     console.log(results)
     console.log(featuredResults)
-}
+
+
 
 const createPool = () => {
     pool = mysql.createPool({
