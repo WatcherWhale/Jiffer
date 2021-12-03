@@ -49,18 +49,8 @@ router.get("/pictures/:uuid", async (req, res) => {
             return;
         }
 
-        // Get the gif from the S3 bucket
-        const file = await bucket.getFile(gif.path);
+        res.redirect("/jiff/" + req.params.uuid + ".gif");
 
-        // Check if the file exists in the bucket
-        if(!file)
-        {
-            res.status(404).send({status: 404, message: "Image file is not found."});
-            return;
-        }
-
-        // Send the file
-        res.contentType("image/gif").send(file);
     })
     .catch((err) => {
         console.log(err)
