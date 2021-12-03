@@ -1,0 +1,22 @@
+{
+  "name": "lambda-remove",
+  "version": "0.0.0",
+  "description": "The lambda that deletes all expired images from the S3 bucket and database.",
+  "contributors": [
+    {
+      "name": "Mathias Maes"
+    },
+    {
+      "name": "Cato van Hooijdonk"
+    },
+    {
+      "name": "Bert Van Itterbeeck"
+    }
+  ],
+  "license": "GPL-3.0-or-later",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.1037.0",
+    "mysql": "^2.18.1"
+  }
+}
