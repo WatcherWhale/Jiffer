@@ -2,6 +2,7 @@ build:
 	make build -C frontend
 	make build -C backend
 	make build -C lambda-gif
+	make build -C lambda-remove
 
 clean:
 	rm -rf dist
@@ -32,4 +33,5 @@ package:
 	bsdtar -a -cf jiffer-frontend.tar.gz -C dist/static .
 	# Publish docker images
 	make login publish -C lambda-gif
+	make login publish -C lambda-remove
 

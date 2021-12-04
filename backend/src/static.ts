@@ -18,22 +18,16 @@ if(Config.useStaticBucket)
         if(req.path == "/") reqPath = "/index.html";
         reqPath = reqPath.slice(1);
 
+        // Check if file exists in bucket
         if(!await bucket.exists(reqPath))
         {
+            // If file does not exist continue with other routing methods
             next();
             return;
         }
 
-        // If the asset is not a html file, redirect to cloudfront
-        if(Config.cloudfront !== "" && reqPath.indexOf("html") === -1)
-        {
-            res.redirect(Config.cloudfront + "/" + reqPath)
-            return;
-        }
-
-
         bucket.getFile(reqPath).then(async (file) => {
-            // File does not exist, continue with other routing methods
+            // File does not exist or something went wrong. Continue with other routing methods
             if(file == undefined)
             {
                 next();
