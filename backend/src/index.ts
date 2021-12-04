@@ -23,11 +23,11 @@ app.use("/jiff", JIFFRouter);
 // Register static assets
 app.use(Static);
 
-// 404 Error
-app.use((req, res, next) => {
-    res.status(404).contentType("application/json")
-        .send({status: 404});
+// 404 error page redirect
+app.use(async (req, res, next) => {
+    res.redirect("/#/404");
 });
+
 
 // Start Server
 app.listen(Config.port, () => {

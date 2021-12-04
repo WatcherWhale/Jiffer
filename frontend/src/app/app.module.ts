@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { JiffComponent } from './jiff/jiff.component';
 import { JiffListComponent } from './jiff-list/jiff-list.component';
 import { NewjifComponent } from './newjif/newjif.component';
+import { Error404Component } from './error404/error404.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { NewjifComponent } from './newjif/newjif.component';
     HomeComponent,
     JiffComponent,
     JiffListComponent,
-    NewjifComponent
+    NewjifComponent,
+    Error404Component
+
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,10 @@ import { NewjifComponent } from './newjif/newjif.component';
       {path: "", component: HomeComponent},
       {path: "eula", component: TermsComponent},
       {path: "login", component: LoginComponent},
-      {path: "create", component: NewjifComponent}
+      {path: "create", component: NewjifComponent},
+      {path: "404", component: Error404Component},
+      {path: '**', redirectTo: '/404'}
+
     ], { useHash: true, onSameUrlNavigation:'reload' })
   ],
   providers: [],
