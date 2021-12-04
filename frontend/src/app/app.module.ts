@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { JiffComponent } from './jiff/jiff.component';
 import { JiffListComponent } from './jiff-list/jiff-list.component';
+import { Error404Component } from './error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { JiffListComponent } from './jiff-list/jiff-list.component';
     LoginComponent,
     HomeComponent,
     JiffComponent,
-    JiffListComponent
+    JiffListComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
@@ -31,8 +33,9 @@ import { JiffListComponent } from './jiff-list/jiff-list.component';
     RouterModule.forRoot([
       {path: "", component: HomeComponent},
       {path: "eula", component: TermsComponent},
-      {path: "login", component: LoginComponent}
-    ], { useHash: true, onSameUrlNavigation:'reload' })
+      {path: "login", component: LoginComponent},
+      {path: "**", component: Error404Component}
+    ], { useHash: false, onSameUrlNavigation:'reload' })
   ],
   providers: [],
   bootstrap: [AppComponent]
