@@ -52,3 +52,12 @@ article:hover .overlay {
     width:100%;
     height:100%;
 }
+
+figure.carousel-figure {
+    height: 500px;
+}
+
+figure.carousel-figure img {
+    height: 100% !important;
+    width: auto !important;
+}
