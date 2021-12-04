@@ -1,3 +1,4 @@
+import { CognitoService } from './../../services/cognito.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
   validemail :boolean = true;
   registering :boolean = true;
 
-  constructor() {}
+  constructor(public CogService :CognitoService) {}
 
   ngOnInit(): void {
   }

@@ -1,5 +1,13 @@
-<form>
+<form *ngIf="CogService.cookieChecker()">
+    <figure>
+        <img src="assets/Jiffer.gif">
+    </figure>
+    <p style="font-weight: bolder;">
+        already logged in, have fun creating!
+    </p>
+</form>
 
+<form *ngIf="!CogService.cookieChecker()">
     <figure>
         <img src="assets/Jiffer.gif">
     </figure>

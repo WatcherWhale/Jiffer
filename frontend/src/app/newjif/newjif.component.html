@@ -1,1 +1,7 @@
-<app-form></app-form>
+<app-form *ngIf="CogService.cookieChecker()"></app-form>
+
+<div *ngIf="!CogService.cookieChecker()">
+  <p>
+    Log in before making a JIFF
+  </p>
+</div>

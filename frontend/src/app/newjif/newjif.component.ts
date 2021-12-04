@@ -1,3 +1,4 @@
+import { CognitoService } from './../../services/cognito.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewjifComponent implements OnInit {
 
-  constructor() { }
+  constructor(public CogService :CognitoService) {
+  }
 
   ngOnInit(): void {
   }
+
 
 }
