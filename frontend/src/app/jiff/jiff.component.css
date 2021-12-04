@@ -54,7 +54,13 @@ article:hover .overlay {
 }
 
 figure.carousel-figure {
-    height: 500px;
+    height: 250px;
+}
+
+@media(min-width: 769px) {
+    figure.carousel-figure {
+        height: 500px;
+    }
 }
 
 figure.carousel-figure img {
