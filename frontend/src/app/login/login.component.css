@@ -3,24 +3,30 @@ form {
   width: 40%;
   border-radius: 20px;
   padding: 100px;
-  padding-top:20px;
-  margin-top: 50px !important;
-  margin:auto;
+  padding-top: 20px;
+  margin-top: 6% !important;
+  margin: auto;
 }
 
 input{
-  color:red;
+  color: red;
+  background-color: rgba(255, 255, 255, 0.76);
 }
 
 label{
-  color:white;
+  color: white;
 }
 
 figure{
   width: 200px;
-  margin-left:30%;
+  margin-left: 30%;
+  margin-bottom: 20px;
 }
 
 a {
-  color:white;
+  color: white;
+}
+
+p{
+  color: white;
 }

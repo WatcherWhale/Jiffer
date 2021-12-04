@@ -1,47 +1,49 @@
 <form>
 
     <figure>
-        <img src="https://user-images.githubusercontent.com/31286353/143938647-3f5c2e0d-afc3-4035-9795-1a219a71d19b.gif"> <!--THIS IN STATIC ASSETS?, copied this from github issue-->
+        <img src="assets/Jiffer.gif">
     </figure>
 
-    <div class="field">
-        <label class="label"> Username </label>
-        <div class="control has-icons-left">
-            <input class="input is-danger is-rounded" type="text" placeholder="Name">
-            <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-            </span>
-        </div>
-    </div>
+    <br>
 
     <div class="field">
         <label class="label"> Email </label>
         <div class="control has-icons-left">
-            <input class="input is-danger is-rounded" type="email" placeholder="Email" >
+            <input class="input is-danger is-rounded" type="email" placeholder="Email@example.com" (input)="mailcheck()" >
             <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
             </span>
         </div>
-        <p class="help is-danger">This email is invalid</p> <!--TODO: simple check if mail is valid (is there an @?) -->
+        <p class="help is-danger" *ngIf="!validemail">This email is invalid</p>
     </div>
 
     <div class="field">
-      <label class="label"> Password </label>
-      <div class="control has-icons-left">
-          <input class="input is-danger is-rounded" type="password" placeholder="Password">
-          <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-          </span>
-      </div>
-  </div>
-
-    <div class="field">
-        <div class="control">
-            <label class="checkbox">
-                <input type="checkbox">
-                I agree to the <a href="#">terms and conditions</a>
-            </label>
+        <label class="label"> Password </label>
+        <div class="control has-icons-left">
+            <input class="input is-danger is-rounded" type="password" placeholder="Password">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
         </div>
+    </div>
+
+    <div class="field" *ngIf="registering">
+        <label class="label"> Confirm Password </label>
+        <div class="control has-icons-left">
+            <input class="input is-danger is-rounded" type="password" placeholder="Repeat password">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+
+    <div class="field" *ngIf="registering">
+        <input class="is-checkradio has-background-color is-danger" id="eulacheck" type="checkbox" name="eula">
+        <label for="eulacheck">I agree to the <a href="#/eula">terms and conditions</a></label>
     </div>
 
     <div class="field is-grouped">
@@ -50,4 +52,12 @@
         </div>
     </div>
 
+    <br>
+
+    <p *ngIf="registering">
+        Already have an account? <a (click)="ChangeType()" style="font-weight: bolder; text-decoration: underline;"> Login </a>instead...
+    </p>
+    <p *ngIf="!registering">
+        Don't have an account? <a (click)="ChangeType()" style="font-weight: bolder; text-decoration: underline;">Register </a> instead
+    </p>
 </form>
