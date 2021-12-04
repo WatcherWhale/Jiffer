@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { JiffComponent } from './jiff/jiff.component';
 import { JiffListComponent } from './jiff-list/jiff-list.component';
+import { NewjifComponent } from './newjif/newjif.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { JiffListComponent } from './jiff-list/jiff-list.component';
     LoginComponent,
     HomeComponent,
     JiffComponent,
-    JiffListComponent
+    JiffListComponent,
+    NewjifComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { JiffListComponent } from './jiff-list/jiff-list.component';
     RouterModule.forRoot([
       {path: "", component: HomeComponent},
       {path: "eula", component: TermsComponent},
-      {path: "login", component: LoginComponent}
+      {path: "login", component: LoginComponent},
+      {path: "create", component: NewjifComponent}
     ], { useHash: true, onSameUrlNavigation:'reload' })
   ],
   providers: [],
