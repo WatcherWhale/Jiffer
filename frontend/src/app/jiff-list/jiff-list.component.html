@@ -2,8 +2,8 @@
     <!--p class="title is-5 maintitle">All Jiffs:</p-->
 
 
-    <div class="tile is-ancestor is-block-desktop is-flex-widescreen">
-        <div class="tile is-parent is-vertical is-3 is-4-desktop is-full-tablet" *ngFor="let tile of tiles">
+    <div class="tile">
+        <div class="tile is-parent is-vertical responsive" *ngFor="let tile of tiles">
             <div class="tile is-child" *ngFor="let gif of tile">
                 <app-jiff [uuid]="gif.uuid" [name]="gif.name"></app-jiff>
             </div>
