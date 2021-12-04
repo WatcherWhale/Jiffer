@@ -5,7 +5,6 @@ import { JIFFRouter } from './jiff';
 import { AuthMiddleware } from './authentication';
 import { Config } from './helpers/config';
 import {Static} from './static';
-import {Router404} from './404';
 
 const app = express();
 
@@ -24,8 +23,10 @@ app.use("/jiff", JIFFRouter);
 // Register static assets
 app.use(Static);
 
-// Register 404 page and not specified routes
-app.use(Router404);
+// 404 error page redirect
+app.use(async (req, res, next) => {
+    res.redirect("/#/404");
+});
 
 
 // Start Server

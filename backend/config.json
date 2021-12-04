@@ -1,6 +1,6 @@
 {
     "port": 8080,
-    "useStaticBucket": true,
+    "useStaticBucket": false,
     "buckets": {
         "gifs": {
             "region": "us-east-1",

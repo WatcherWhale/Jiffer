@@ -34,8 +34,9 @@ import { Error404Component } from './error404/error404.component';
       {path: "", component: HomeComponent},
       {path: "eula", component: TermsComponent},
       {path: "login", component: LoginComponent},
-      {path: "**", component: Error404Component}
-    ], { useHash: false, onSameUrlNavigation:'reload' })
+      {path: "404", component: Error404Component},
+      {path: '**', redirectTo: '/404'}
+    ], { useHash: true, onSameUrlNavigation:'reload' })
   ],
   providers: [],
   bootstrap: [AppComponent]
