@@ -8,10 +8,9 @@ export class CognitoService {
   constructor() { }
 
   cookieChecker(){
-    if(document.cookie.indexOf("JifferTokenCookie") !== -1)
-      return true
-    else
-      return false
+
+    return document.cookie.indexOf("JifferTokenCookie") !== -1
+    
   }
 
 }
