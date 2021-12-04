@@ -1,5 +1,5 @@
 import path from "path";
-import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, GetObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s3";
 import {IFile} from "../types/Interfaces";
 import {Stream} from "stream";
 import {toBuffer} from "./streams";
@@ -11,6 +11,19 @@ export class Bucket
     constructor(private readonly bucketName: string, region: string)
     {
         this.client = new S3Client({region: region});
+    }
+
+    public exists(objectPath: string) : Promise<boolean>
+    {
+        const params = {
+            Bucket: this.bucketName,
+            Key: objectPath
+        }
+
+        return new Promise((resolve, reject) => {
+            this.client.send(new HeadObjectCommand(params)).then(data => resolve(true)).catch(err => resolve(false));
+        });
+
     }
 
     public async getFile(bucketPath: string) : Promise<Buffer | undefined>
