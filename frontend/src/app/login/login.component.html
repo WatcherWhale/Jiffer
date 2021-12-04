@@ -1,1 +1,53 @@
-<p>login works!</p>
+<form>
+
+    <figure>
+        <img src="https://user-images.githubusercontent.com/31286353/143938647-3f5c2e0d-afc3-4035-9795-1a219a71d19b.gif"> <!--THIS IN STATIC ASSETS?, copied this from github issue-->
+    </figure>
+
+    <div class="field">
+        <label class="label"> Username </label>
+        <div class="control has-icons-left">
+            <input class="input is-danger is-rounded" type="text" placeholder="Name">
+            <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label"> Email </label>
+        <div class="control has-icons-left">
+            <input class="input is-danger is-rounded" type="email" placeholder="Email" >
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </div>
+        <p class="help is-danger">This email is invalid</p> <!--TODO: simple check if mail is valid (is there an @?) -->
+    </div>
+
+    <div class="field">
+      <label class="label"> Password </label>
+      <div class="control has-icons-left">
+          <input class="input is-danger is-rounded" type="password" placeholder="Password">
+          <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+          </span>
+      </div>
+  </div>
+
+    <div class="field">
+        <div class="control">
+            <label class="checkbox">
+                <input type="checkbox">
+                I agree to the <a href="#">terms and conditions</a>
+            </label>
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-danger is-rounded">Submit</button>
+        </div>
+    </div>
+
+</form>
