@@ -15,8 +15,8 @@ const handler = async (event) => {
 
     console.log("Querying database");
     createPool();
-    const results = await query("select * from gifs where creationDate < current_date() and featured = 0");
-    const featuredResults = await query("select * from gifs where creationDate + 30 < current_date() and featured = 1")
+    const results = await query("SELECT * FROM gifs WHERE creationDate < current_date() AND featured = 0");
+    const featuredResults = await query("SELECT * FROM gifs WHERE creationDate + INTERVAL 30 day < current_date() AND featured = 1")
 
     console.log("Deleting files from S3");
     const promises = [];
@@ -46,8 +46,8 @@ const handler = async (event) => {
     // Delete entries from database
     console.log("Deleting database entries.");
 
-    await query("delete from gifs where creationDate < current_date() and featured = 0")
-    await query("delete from gifs where creationDate + 30 < current_date() and featured = 1")
+    await query("DELETE FROM gifs WHERE creationDate < current_date() AND featured = 0")
+    await query("DELETE FROM gifs WHERE creationDate + current_date() + INTERVAL 30 day < current_date() AND featured = 1")
 
     console.log("Nightly cleaning of gifs complete!");
 }
