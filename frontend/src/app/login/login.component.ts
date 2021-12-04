@@ -8,27 +8,50 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  validemail :boolean = true;
+  validpass : boolean = false;
   registering :boolean = true;
+  readytoSubmit :boolean =false;
+
+  email = document.getElementsByName("email")
 
   constructor(public CogService :CognitoService) {}
 
   ngOnInit(): void {
   }
 
-  mailcheck(){
-    const email = document.getElementsByTagName("input")[0].value;
-    if(email.includes("@"))
-      this.validemail=true;
+  passwordCheck(){
+    const pas1 = document.getElementsByTagName("input")[1].value;
+    const pas2 = document.getElementsByTagName("input")[2].value;
+
+    if(pas1 == pas2)
+      this.validpass = true;
     else
-      this.validemail=false;
+      this.validpass = false;
+
   }
 
   ChangeType(){
     if(this.registering)
       this.registering = false;
     else
-      this.registering =true;
+      this.registering = true;
+  }
+
+  dis1=true;
+  dis2=true;
+
+  changing1(){
+    if(this.email[0] !== null && this.validpass && document.querySelector('#eulacheck:checked') !== null)
+      this.dis1 = false;
+    else
+      this.dis1 = true;
+  }
+
+  changing2(){
+    if(this.email[1] !== null)
+      this.dis2 = false;
+    else
+      this.dis2 = true;
   }
 
 }
