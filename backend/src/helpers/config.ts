@@ -2,7 +2,6 @@ export interface IConfig
 {
     port: number
     useStaticBucket: boolean
-    cloudfront: string
     buckets: IBuckets
     db: IDatabase
     cognito: ICognito
