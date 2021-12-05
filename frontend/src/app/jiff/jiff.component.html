@@ -1,5 +1,5 @@
 <article class="notification is-danger">
-    <figure class="image">
+    <figure class="image" [ngClass]="{'carousel-figure': carousel}">
         <img src="{{api.getHost()}}/jiff/{{uuid}}.gif">
     </figure>
     <div class="p-5 overlay has-text-centered">

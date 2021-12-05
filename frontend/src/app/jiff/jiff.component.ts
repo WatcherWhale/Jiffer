@@ -10,6 +10,7 @@ export class JiffComponent implements OnInit {
 
   @Input("uuid") uuid: string = "";
   @Input("name") name: string = "";
+  @Input("carousel") carousel: boolean = false;
   copied : boolean = false;
 
   constructor(public api : ApiService) { }
