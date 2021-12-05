@@ -1,5 +1,7 @@
 import { CognitoService } from './../../services/cognito.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +16,18 @@ export class LoginComponent implements OnInit {
 
   email = document.getElementsByName("email")
 
-  constructor(public CogService :CognitoService) {}
+  constructor(public CogService: CognitoService, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
+  }
+
+  submit() {
+    const form = document.getElementsByTagName('form')[0];
+    const data = new FormData(form);
+
+    this.http.post(form.action, data).subscribe((result) => {
+      this.router.navigate(['/']);
+    });
   }
 
   passwordCheck(){
