@@ -4,11 +4,8 @@
     <div class="carousel">
       <div class="item-{{i + 1}} is-justify-content-center is-flex" *ngFor="let image of images; let i = index">
 
-        <app-jiff [uuid]="image.uuid" [name]="image.name"></app-jiff>
+        <app-jiff [uuid]="image.uuid" [name]="image.name" [carousel]="true"></app-jiff>
 
-        <!--a href="#/jiff/{{image.uuid}}">
-          <img src="{{api.getHost()}}/jiff/{{image.uuid}}.gif" alt="{{image.name}}">
-        </a-->
       </div>
     </div>
   </div>

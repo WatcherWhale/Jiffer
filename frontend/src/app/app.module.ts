@@ -14,6 +14,7 @@ import { JiffComponent } from './jiff/jiff.component';
 import { JiffListComponent } from './jiff-list/jiff-list.component';
 import { NewjifComponent } from './newjif/newjif.component';
 import { Error404Component } from './error404/error404.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { Error404Component } from './error404/error404.component';
     BrowserModule,
     ClipboardModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: "", component: HomeComponent},
       {path: "eula", component: TermsComponent},

@@ -7,7 +7,9 @@
     </p>
 </form>
 
+
 <form *ngIf="!CogService.cookieChecker() && registering" action="/register" method="POST" (change)="changing1()">
+  
     <figure class="is-flex is-justify-content-center">
         <img src="assets/Jiffer.gif">
     </figure>
@@ -65,6 +67,7 @@
     </p>
 
 </form>
+
 
 
 
