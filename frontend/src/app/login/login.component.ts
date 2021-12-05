@@ -10,7 +10,9 @@ export class LoginComponent implements OnInit {
 
   validpass : boolean = false;
   registering :boolean = true;
-  readytoSubmit :boolean =false;
+  readytoSubmit :boolean = false;
+  dis1 :boolean = true;
+  dis2 :boolean = true;
 
   email = document.getElementsByName("email")
 
@@ -23,22 +25,15 @@ export class LoginComponent implements OnInit {
     const pas1 = document.getElementsByTagName("input")[1].value;
     const pas2 = document.getElementsByTagName("input")[2].value;
 
-    if(pas1 == pas2)
-      this.validpass = true;
-    else
-      this.validpass = false;
+    this.validpass = pas1 == pas2;
 
   }
 
   ChangeType(){
-    if(this.registering)
-      this.registering = false;
-    else
-      this.registering = true;
-  }
 
-  dis1=true;
-  dis2=true;
+    this.registering = !this.registering;
+
+  }
 
   changing1(){
     if(this.email[0] !== null && this.validpass && document.querySelector('#eulacheck:checked') !== null)
@@ -48,10 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   changing2(){
-    if(this.email[1] !== null)
-      this.dis2 = false;
-    else
-      this.dis2 = true;
+    this.dis2 = false;
   }
 
 }

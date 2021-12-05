@@ -18,9 +18,10 @@ label{
 }
 
 figure{
-  width: 200px;
-  margin-left: 30%;
   margin-bottom: 20px;
+}
+img{
+  width: 250px;
 }
 
 a {
