@@ -1,1 +1,114 @@
-<p>login works!</p>
+<form *ngIf="CogService.cookieChecker()">
+    <figure>
+        <img src="assets/Jiffer.gif">
+    </figure>
+    <p style="font-weight: bolder;">
+        already logged in, have fun creating!
+    </p>
+</form>
+
+
+<form *ngIf="!CogService.cookieChecker() && registering" action="/register" method="POST" (change)="changing1()">
+  
+    <figure class="is-flex is-justify-content-center">
+        <img src="assets/Jiffer.gif">
+    </figure>
+
+    <br>
+
+    <div class="field">
+        <label class="label"> Email </label>
+        <div class="control has-icons-left">
+            <input class="input is-danger is-rounded" type="email" placeholder="Email@example.com" name="email">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label"> Password </label>
+        <div class="control has-icons-left">
+            <input class="input is-danger is-rounded" type="password" placeholder="Password" name="password">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label"> Confirm Password </label>
+        <div class="control has-icons-left">
+            <input class="input is-danger is-rounded" type="password" placeholder="Repeat password" (input)="passwordCheck()">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+        </div>
+        <p class="help is-danger" *ngIf="!validpass">The passwords don't match</p>
+    </div>
+
+    <br>
+
+    <div class="field">
+        <input class="is-checkradio has-background-color is-danger" id="eulacheck" type="checkbox" name="eula">
+        <label for="eulacheck">I agree to the <a href="#/eula">terms and conditions</a></label>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-danger is-rounded" id="button" [disabled]="dis1">Submit</button>
+        </div>
+    </div>
+
+    <br>
+
+    <p>
+        Already have an account? <a (click)="ChangeType()" style="font-weight: bolder; text-decoration: underline;"> Login </a>instead...
+    </p>
+
+</form>
+
+
+
+
+<form *ngIf="!registering" action="/login" method="POST" (change)="changing2()">
+
+    <figure class="is-flex is-justify-content-center">
+        <img src="assets/Jiffer.gif">
+    </figure>
+
+    <div class="field">
+      <label class="label"> Email </label>
+      <div class="control has-icons-left">
+          <input class="input is-danger is-rounded" type="email" placeholder="Email@example.com" name="email">
+          <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+          </span>
+      </div>
+    </div>
+
+    <div class="field">
+        <label class="label"> Password </label>
+        <div class="control has-icons-left">
+            <input class="input is-danger is-rounded" type="password" placeholder="Password" name="password">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-danger is-rounded" id="button" [disabled]="dis2">Submit</button>
+        </div>
+    </div>
+
+    <br>
+
+    <p>
+        Don't have an account? <a (click)="ChangeType()" style="font-weight: bolder; text-decoration: underline;">Register </a> instead
+    </p>
+
+</form>
