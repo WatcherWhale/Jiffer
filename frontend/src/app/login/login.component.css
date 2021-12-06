@@ -31,3 +31,15 @@ a {
 p{
   color: white;
 }
+
+@media (max-width: 1023px) {
+  form {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1500px) and (min-width: 1024px) {
+  form {
+    width: 60%;
+  }
+}
