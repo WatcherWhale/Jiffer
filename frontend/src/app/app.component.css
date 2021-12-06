@@ -1,24 +1,58 @@
-header{
+nav.is-danger{
     background-color: rgba(73, 13, 13, 0.329);
-    height: 50px;
 }
 
-nav{
-    float:right;
-    margin-right: 80px;
-}
-
-a{
+a {
     color:white;
-}
-a:hover{
-    color:red;
+    font-size: 20px;
 }
 
-span{
-    color:rgb(255, 255, 255);
+span.logo {
     font-family: 'Courier New', monospace;
     font-size: 40px;
     font-weight: 600;
     margin-left: 20px;
+}
+
+a.navbar-item:focus {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+a.navbar-item:hover, a.navbar-item.is-active {
+    background-color: transparent !important;
+    color: red !important;
+}
+
+span.icon {
+    margin-right: 0.5rem;
+}
+
+.navbar-end {
+    margin-right: 4rem;
+}
+
+.navbar-end .navbar-item + .navbar-item::before {
+    color: #b5b5b5;
+    content: "\02022";
+    margin-right: 2rem;
+}
+
+
+.navbar-burger {
+    height: auto !important;
+    background-color: transparent !important;
+}
+
+
+@media (max-width: 1023px) {
+    .navbar-menu {
+        background-color: rgba(73, 13, 13, 0) !important;
+    }
+
+    .navbar-menu.is-active .navbar-end .navbar-item + .navbar-item::before {
+        color: #b5b5b5;
+        content: "";
+        margin-right: 0rem;
+    }
 }
