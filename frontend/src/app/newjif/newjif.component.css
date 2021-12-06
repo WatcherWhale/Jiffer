@@ -1,12 +1,10 @@
 div{
-  background-color: rgba(241, 113, 113, 0.322);
-  border-radius: 20px;
   color:white;
   width: 500px;
   font-size: xx-large;
-  margin:auto;
-  margin-top:100px;
-  height: 100px;
+}
+
+p {
   position: absolute;
   top: 50%;
   left: 50%;
