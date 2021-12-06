@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   readytoSubmit :boolean = false;
   dis1 :boolean = true;
   dis2 :boolean = true;
+  checkSend : any;
+  checkError: any;
 
   email = document.getElementsByName("email")
 
@@ -27,9 +29,16 @@ export class LoginComponent implements OnInit {
     const form = document.getElementsByTagName('form')[0];
     const data = new FormData(form);
 
-    this.http.post(form.action, data).subscribe((result) => {
-      this.router.navigate(['/']);
-    });
+    this.http.post(form.action, data).subscribe(
+      (result) => {
+        this.router.navigate(['/']);
+        this.checkSend = result;
+      },
+      (error) => {
+        console.log(error)
+        this.checkError = error;
+      }
+    );
   }
 
   passwordCheck(){

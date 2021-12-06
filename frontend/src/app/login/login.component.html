@@ -10,7 +10,7 @@
 
 
 <form *ngIf="!CogService.cookieChecker() && registering" action="/register" method="POST" (change)="changing1()" (ngSubmit)="submit()">
-  
+
     <figure class="is-flex is-justify-content-center">
         <img src="assets/Jiffer.gif">
     </figure>
@@ -60,7 +60,13 @@
             <button class="button is-danger is-rounded" id="button" [disabled]="dis1">Submit</button>
         </div>
     </div>
-
+    <br>
+    <p *ngIf="this.checkSend">
+        Please Check your Mailbox for conformation mail.
+    </p>
+    <p *ngIf="this.checkError">
+        Something went wrong! Please try again.
+    </p>
     <br>
 
     <p>
