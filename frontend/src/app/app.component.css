@@ -45,9 +45,15 @@ span.icon {
 }
 
 
-@media (max-width: 1023px) {
+@media (max-width: 1300px) {
     .navbar-menu {
         background-color: rgba(73, 13, 13, 0) !important;
+
+    }
+
+    a {
+        color:white;
+        font-size: inherit;
     }
 
     .navbar-menu.is-active .navbar-end .navbar-item + .navbar-item::before {
