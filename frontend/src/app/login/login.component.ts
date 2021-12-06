@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   validpass : boolean = false;
-  registering :boolean = true;
+  registering :boolean = false;
   readytoSubmit :boolean = false;
   dis1 :boolean = true;
   dis2 :boolean = true;
