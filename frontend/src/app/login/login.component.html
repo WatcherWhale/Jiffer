@@ -8,8 +8,9 @@
 </form>
 
 
-<form *ngIf="!CogService.cookieChecker() && registering" action="/register" method="POST" (change)="changing1()">
 
+<form *ngIf="!CogService.cookieChecker() && registering" action="/register" method="POST" (change)="changing1()" (ngSubmit)="submit()">
+  
     <figure class="is-flex is-justify-content-center">
         <img src="assets/Jiffer.gif">
     </figure>
@@ -71,7 +72,7 @@
 
 
 
-<form *ngIf="!registering" action="/login" method="POST" (change)="changing2()">
+<form *ngIf="!registering" action="/login" method="POST" (change)="changing2()" (ngSubmit)="submit()">
 
     <figure class="is-flex is-justify-content-center">
         <img src="assets/Jiffer.gif">
