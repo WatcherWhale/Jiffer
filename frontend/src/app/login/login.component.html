@@ -8,6 +8,7 @@
 </form>
 
 
+
 <form *ngIf="!CogService.cookieChecker() && registering" action="/register" method="POST" (change)="changing1()" (ngSubmit)="submit()">
   
     <figure class="is-flex is-justify-content-center">
