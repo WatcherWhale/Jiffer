@@ -2,8 +2,7 @@
 FROM public.ecr.aws/lambda/nodejs:14
 
 # Update the docker image
-RUN yum update
-RUN yum -y upgrade
+RUN yum -y update
 
 # Copy npm package info into the container, and install the node modules
 COPY package.json package-lock.json ${LAMBDA_TASK_ROOT}/
