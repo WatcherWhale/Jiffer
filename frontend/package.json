@@ -1,6 +1,6 @@
 {
   "name": "jiffer-frontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "contributors": [
     {
       "name": "Mathias Maes"
@@ -10,9 +10,6 @@
     },
     {
       "name": "Bert Van Itterbeeck"
-    },
-    {
-      "name": "Yarne Van Steenwinckel"
     }
   ],
   "license": "GPL-3.0-or-later",

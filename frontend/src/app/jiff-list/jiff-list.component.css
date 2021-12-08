@@ -20,6 +20,10 @@ p.maintitle{
     width: 100%;
 }
 
+.tile {
+    flex-grow: 0 !important
+}
+
 @media (min-width: 769px) {
     .tile.responsive {
         flex: none;
