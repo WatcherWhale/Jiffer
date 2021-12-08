@@ -103,10 +103,12 @@ router.post("/pictures", async (req, res) => {
         data: Buffer.from(JSON.stringify(jsonObj), 'utf-8')
     });
 
+    const featured = req.body.featured && (req.body.featured == "true" || req.body.featured == "on");
+
     // Upload all files
     bucket.uploadFiles(uuid, files).then(() => {
 
-        db.RegisterGif(uuid, req.body.name, uuid + "/" + uuid + ".gif", req.body.featured == "true", new Date(), true).then(() => {
+        db.RegisterGif(uuid, req.body.name, uuid + "/" + uuid + ".gif", featured, new Date(), true).then(() => {
             res.contentType("application/json")
                 .send({
                     "status": 200,

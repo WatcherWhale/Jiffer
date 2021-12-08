@@ -17,6 +17,7 @@ export class FormComponent implements OnInit {
   id: string = "";
   submitted: boolean = false;
   files :string[] = []
+  filesStr = "";
   advanced :boolean=false;
 
   ngOnInit(): void {
@@ -44,6 +45,9 @@ export class FormComponent implements OnInit {
 
     for(let i = 0; i < files.length; i++)
       this.files.push(files[i].name);
+
+    this.filesStr = this.files.join(" ,");
+    if(this.filesStr.length > 50) this.filesStr = this.filesStr.substring(0, 47) + "...";
   }
 
   submit() {
