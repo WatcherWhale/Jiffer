@@ -17,7 +17,7 @@ export class CarouselComponent implements OnInit {
     this.images = await this.api.doRequest(this.api.getApi() + "/pictures/?featured=1") as any[];
 
     let toShow = this.images.length - 1;
-    if(toShow > 3) toShow = 3;
+    if(toShow > 2) toShow = 2;
     if(toShow <= 0) toShow = 0;
 
 
